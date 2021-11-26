@@ -25,16 +25,14 @@
     <div class="c-body">
       <main class="c-main">
         <!-- Main content here -->
-        <main class="main my-2 mx-3">
+        <main class="main mt-0 mx-3">
           <form id="formListEvent" name="list-event" method="post" action="/list-event" onsubmit="enableFields()">
           <input type="name" class="form-control" id="clientName" name="clientName" value="<%= clientName %>" hidden>
 
-          <h3>List Events</h3>
-
-          <h4> Event Information</h4>
-          <p>Client Name: <%= clientName %></p>
-          <p>Date Range Start: <%= dateStartInput %></p>
-          <p>Date Range End: <%= dateEndInput %></p>
+          <h2>List Events</h2>
+          <hr>
+          <h4><small class="text">Client Name: <u><%= clientName %></u></small></h4>
+          <h4><small class="text">Date Range: <u><%= dateStartInput %> to <%= dateEndInput %></u></small></h4>
 
     <!-- Event History Listing -->
 
@@ -42,28 +40,41 @@
              <table class="table table-bordered bg-white">
               <thead class="thead-dark">
                 <tr>
-                  <th scope="col"></th>
-                  <th scope="col">DATE</th>
-                  <th scope="col">AGENT</th>
-                  <th scope="col">CONTACT 1</th>
-                  <th scope="col">CONTACT 2</th>
-                  <th scope="col">VISIT TYPE</th>
-                  <th scope="col">REMARKS</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle; width: 3%"></th>
+                  <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">DATE</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">AGENT</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">CONTACT 1</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">CONTACT 2</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">VISIT TYPE</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle; width: 47%">REMARKS</th>
                 </tr>
               </thead>
               <tr>
                 <%
                   var eventsList ='';
+                  var k = 1;
+                  var repContact1 = [];
+                  var repContact2 = [];
                   for (i = 0; i < result.events.length; i++) {
-                    eventsList += '<th scope="row">' + '<button type="submit" form="formListEvent" name="submit" value=' + result.events[i]._id + '>Edit</button>' + '</th>';
+                    eventsList += '<th  style="text-align: center; vertical-align: middle; width: 3%" scope="row">' + '<button type="submit" form="formListEvent" name="submit" value=' + result.events[i]._id + '>Edit</button>' + '</th>';
                     var str = result.events[i].eventTimeIn._i.toString();
                     var str = str.substr(0,10);
-                    eventsList += '<td>' + str + '</td>';
-                    eventsList += '<td>' + result.events[i].agentAbbrev + '</td>';
-                    eventsList += '<td>' + result.events[i].contact1 + '</td>';
-                    eventsList += '<td>' + result.events[i].contact2 + '</td>';
-                    eventsList += '<td>' + result.events[i].eventType + '</td>';
-                    eventsList += '<td>' + result.events[i].eventRemarks + '</td>';
+                    if (result.events[i].contact1 === null){
+                      repContact1.push("NA");
+                    } else{
+                      repContact1.push(result.events[i].contact1);
+                    }
+                    if (result.events[i].contact2 === null){
+                      repContact2.push("NA");
+                    } else{
+                      repContact2.push(result.events[i].contact2);
+                    }
+                    eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + str + '</td>';
+                    eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + result.events[i].agentAbbrev + '</td>';
+                    eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + repContact1[i] + '</td>';
+                    eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + repContact2[i] + '</td>';
+                    eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + result.events[i].eventType + '</td>';
+                    eventsList += '<td style="text-align: left; vertical-align: middle; width: 47%">' + result.events[i].eventRemarks + '</td>';
                     eventsList += '</tr>';
                 }
                 %>
