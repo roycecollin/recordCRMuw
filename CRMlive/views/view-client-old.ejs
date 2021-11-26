@@ -1,0 +1,1356 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+ <title>CRM - View Client</title>
+
+ <script>
+ window.onload = function() {
+   var isEditing = false;
+
+   document.getElementById('editClientName').onclick = function() {
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('newClientName').readOnly = false;
+       document.getElementById('updateClientName').type = 'button';
+       document.getElementById('editClientName').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientName').onclick = function(){
+     isEditing = false;
+     document.getElementById('newClientName').readOnly = true;
+     document.getElementById('updateClientName').type = 'hidden';
+     document.getElementById('editClientName').type = 'button';
+   }
+
+   document.getElementById('editAgentAbbrev').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('agentAbbrev').disabled = false;
+       document.getElementById('updateAgentAbbrev').type = 'button';
+       document.getElementById('editAgentAbbrev').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateAgentAbbrev').onclick = function(){
+     isEditing = false;
+     document.getElementById('agentAbbrev').disabled = true;
+     document.getElementById('updateAgentAbbrev').type = 'hidden';
+     document.getElementById('editAgentAbbrev').type = 'button';
+   }
+
+   document.getElementById('editClientPhone').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientPhone').readOnly = false;
+       document.getElementById('updateClientPhone').type = 'button';
+       document.getElementById('editClientPhone').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientPhone').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientPhone').readOnly = true;
+     document.getElementById('updateClientPhone').type = 'hidden';
+     document.getElementById('editClientPhone').type = 'button';
+   }
+
+   document.getElementById('editClientFax').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientFax').readOnly = false;
+         document.getElementById('updateClientFax').type = 'button';
+         document.getElementById('editClientFax').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientFax').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientFax').readOnly = true;
+     document.getElementById('updateClientFax').type = 'hidden';
+     document.getElementById('editClientFax').type = 'button';
+   }
+
+   document.getElementById('editClientAddress1').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress1').readOnly = false;
+         document.getElementById('updateClientAddress1').type = 'button';
+         document.getElementById('editClientAddress1').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress1').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress1').readOnly = true;
+     document.getElementById('updateClientAddress1').type = 'hidden';
+     document.getElementById('editClientAddress1').type = 'button';
+   }
+
+   document.getElementById('editClientAddress1type').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress1type').disabled = false;
+         document.getElementById('updateClientAddress1type').type = 'button';
+         document.getElementById('editClientAddress1type').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress1type').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress1type').disabled = true;
+     document.getElementById('updateClientAddress1type').type = 'hidden';
+     document.getElementById('editClientAddress1type').type = 'button';
+   }
+
+   document.getElementById('editClientAddress2').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress2').readOnly = false;
+         document.getElementById('updateClientAddress2').type = 'button';
+         document.getElementById('editClientAddress2').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress2').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress2').readOnly = true;
+     document.getElementById('updateClientAddress2').type = 'hidden';
+     document.getElementById('editClientAddress2').type = 'button';
+   }
+
+   document.getElementById('editClientAddress2type').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress2type').disabled = false;
+         document.getElementById('updateClientAddress2type').type = 'button';
+         document.getElementById('editClientAddress2type').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress2type').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress2type').disabled = true;
+     document.getElementById('updateClientAddress2type').type = 'hidden';
+     document.getElementById('editClientAddress2type').type = 'button';
+   }
+
+   document.getElementById('editClientAddress3').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress3').readOnly = false;
+         document.getElementById('updateClientAddress3').type = 'button';
+         document.getElementById('editClientAddress3').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress3').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress3').readOnly = true;
+     document.getElementById('updateClientAddress3').type = 'hidden';
+     document.getElementById('editClientAddress3').type = 'button';
+   }
+
+   document.getElementById('editClientAddress3type').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress3type').disabled = false;
+         document.getElementById('updateClientAddress3type').type = 'button';
+         document.getElementById('editClientAddress3type').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress3type').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress3type').disabled = true;
+     document.getElementById('updateClientAddress3type').type = 'hidden';
+     document.getElementById('editClientAddress3type').type = 'button';
+   }
+
+   document.getElementById('editClientAddress4').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress4').readOnly = false;
+         document.getElementById('updateClientAddress4').type = 'button';
+         document.getElementById('editClientAddress4').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress4').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress4').readOnly = true;
+     document.getElementById('updateClientAddress4').type = 'hidden';
+     document.getElementById('editClientAddress4').type = 'button';
+   }
+
+   document.getElementById('editClientAddress4type').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress4type').disabled = false;
+         document.getElementById('updateClientAddress4type').type = 'button';
+         document.getElementById('editClientAddress4type').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress4type').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress4type').disabled = true;
+     document.getElementById('updateClientAddress4type').type = 'hidden';
+     document.getElementById('editClientAddress4type').type = 'button';
+   }
+
+   document.getElementById('editClientEmail1').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientEmail1').readOnly = false;
+       document.getElementById('updateClientEmail1').type = 'button';
+       document.getElementById('editClientEmail1').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientEmail1').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientEmail1').readOnly = true;
+     document.getElementById('updateClientEmail1').type = 'hidden';
+     document.getElementById('editClientEmail1').type = 'button';
+   }
+
+   document.getElementById('editClientEmail2').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientEmail2').readOnly = false;
+       document.getElementById('updateClientEmail2').type = 'button';
+       document.getElementById('editClientEmail2').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientEmail2').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientEmail2').readOnly = true;
+     document.getElementById('updateClientEmail2').type = 'hidden';
+     document.getElementById('editClientEmail2').type = 'button';
+   }
+
+   document.getElementById('editProducts').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientProdOX').disabled = false;
+       document.getElementById('clientProdPP').disabled = false;
+       document.getElementById('clientProdTP').disabled = false;
+       document.getElementById('updateProducts').type = 'button';
+       document.getElementById('editProducts').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateProducts').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientProdOX').disabled = true;
+     document.getElementById('clientProdPP').disabled = true;
+     document.getElementById('clientProdTP').disabled = true;
+     document.getElementById('updateProducts').type = 'hidden';
+     document.getElementById('editProducts').type = 'button';
+   }
+
+   document.getElementById('editClientNotes').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientNotes').readOnly = false;
+       document.getElementById('updateClientNotes').type = 'button';
+       document.getElementById('editClientNotes').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientNotes').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientNotes').readOnly = true;
+     document.getElementById('updateClientNotes').type = 'hidden';
+     document.getElementById('editClientNotes').type = 'button';
+   }
+
+   document.getElementById('editClientStatus').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientStatus').disabled = false;
+       document.getElementById('updateClientStatus').type = 'button';
+       document.getElementById('editClientStatus').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientStatus').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientStatus').disabled = true;
+     document.getElementById('updateClientStatus').type = 'hidden';
+     document.getElementById('editClientStatus').type = 'button';
+   }
+
+   document.getElementById('editClientNameMobile').onclick = function() {
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('newClientNameMobile').readOnly = false;
+       document.getElementById('updateClientNameMobile').type = 'button';
+       document.getElementById('editClientNameMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientNameMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('newClientNameMobile').readOnly = true;
+     document.getElementById('updateClientNameMobile').type = 'hidden';
+     document.getElementById('editClientNameMobile').type = 'button';
+   }
+
+   document.getElementById('editAgentAbbrevMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('agentAbbrevMobile').disabled = false;
+       document.getElementById('updateAgentAbbrevMobile').type = 'button';
+       document.getElementById('editAgentAbbrevMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateAgentAbbrevMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('agentAbbrevMobile').disabled = true;
+     document.getElementById('updateAgentAbbrevMobile').type = 'hidden';
+     document.getElementById('editAgentAbbrevMobile').type = 'button';
+   }
+
+   document.getElementById('editClientPhoneMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientPhoneMobile').readOnly = false;
+       document.getElementById('updateClientPhoneMobile').type = 'button';
+       document.getElementById('editClientPhoneMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientPhoneMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientPhoneMobile').readOnly = true;
+     document.getElementById('updateClientPhoneMobile').type = 'hidden';
+     document.getElementById('editClientPhoneMobile').type = 'button';
+   }
+
+   document.getElementById('editClientFaxMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientFaxMobile').readOnly = false;
+         document.getElementById('updateClientFaxMobile').type = 'button';
+         document.getElementById('editClientFaxMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientFaxMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientFaxMobile').readOnly = true;
+     document.getElementById('updateClientFaxMobile').type = 'hidden';
+     document.getElementById('editClientFaxMobile').type = 'button';
+   }
+
+   document.getElementById('editClientAddress1Mobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress1Mobile').readOnly = false;
+         document.getElementById('updateClientAddress1Mobile').type = 'button';
+         document.getElementById('editClientAddress1Mobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress1Mobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress1Mobile').readOnly = true;
+     document.getElementById('updateClientAddress1Mobile').type = 'hidden';
+     document.getElementById('editClientAddress1Mobile').type = 'button';
+   }
+
+   document.getElementById('editClientAddress1typeMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress1typeMobile').disabled = false;
+         document.getElementById('updateClientAddress1typeMobile').type = 'button';
+         document.getElementById('editClientAddress1typeMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress1typeMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress1typeMobile').disabled = true;
+     document.getElementById('updateClientAddress1typeMobile').type = 'hidden';
+     document.getElementById('editClientAddress1typeMobile').type = 'button';
+   }
+
+   document.getElementById('editClientAddress2Mobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress2Mobile').readOnly = false;
+         document.getElementById('updateClientAddress2Mobile').type = 'button';
+         document.getElementById('editClientAddress2Mobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress2Mobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress2Mobile').readOnly = true;
+     document.getElementById('updateClientAddress2Mobile').type = 'hidden';
+     document.getElementById('editClientAddress2Mobile').type = 'button';
+   }
+
+   document.getElementById('editClientAddress2typeMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress2typeMobile').disabled = false;
+         document.getElementById('updateClientAddress2typeMobile').type = 'button';
+         document.getElementById('editClientAddress2typeMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress2typeMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress2typeMobile').disabled = true;
+     document.getElementById('updateClientAddress2typeMobile').type = 'hidden';
+     document.getElementById('editClientAddress2typeMobile').type = 'button';
+   }
+
+   document.getElementById('editClientAddress3Mobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress3Mobile').readOnly = false;
+         document.getElementById('updateClientAddress3Mobile').type = 'button';
+         document.getElementById('editClientAddress3Mobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress3Mobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress3Mobile').readOnly = true;
+     document.getElementById('updateClientAddress3Mobile').type = 'hidden';
+     document.getElementById('editClientAddress3Mobile').type = 'button';
+   }
+
+   document.getElementById('editClientAddress3typeMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress3typeMobile').disabled = false;
+         document.getElementById('updateClientAddress3typeMobile').type = 'button';
+         document.getElementById('editClientAddress3typeMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress3typeMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress3typeMobile').disabled = true;
+     document.getElementById('updateClientAddress3typeMobile').type = 'hidden';
+     document.getElementById('editClientAddress3typeMobile').type = 'button';
+   }
+
+   document.getElementById('editClientAddress4Mobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress4Mobile').readOnly = false;
+         document.getElementById('updateClientAddress4Mobile').type = 'button';
+         document.getElementById('editClientAddress4Mobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress4Mobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress4Mobile').readOnly = true;
+     document.getElementById('updateClientAddress4Mobile').type = 'hidden';
+     document.getElementById('editClientAddress4Mobile').type = 'button';
+   }
+
+   document.getElementById('editClientAddress4typeMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+         document.getElementById('clientAddress4typeMobile').disabled = false;
+         document.getElementById('updateClientAddress4typeMobile').type = 'button';
+         document.getElementById('editClientAddress4typeMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientAddress4typeMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientAddress4typeMobile').disabled = true;
+     document.getElementById('updateClientAddress4typeMobile').type = 'hidden';
+     document.getElementById('editClientAddress4typeMobile').type = 'button';
+   }
+
+   document.getElementById('editClientEmail1Mobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientEmail1Mobile').readOnly = false;
+       document.getElementById('updateClientEmail1Mobile').type = 'button';
+       document.getElementById('editClientEmail1Mobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientEmail1Mobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientEmail1Mobile').readOnly = true;
+     document.getElementById('updateClientEmail1Mobile').type = 'hidden';
+     document.getElementById('editClientEmail1Mobile').type = 'button';
+   }
+
+   document.getElementById('editClientEmail2Mobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientEmail2Mobile').readOnly = false;
+       document.getElementById('updateClientEmail2Mobile').type = 'button';
+       document.getElementById('editClientEmail2Mobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientEmail2Mobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientEmail2Mobile').readOnly = true;
+     document.getElementById('updateClientEmail2Mobile').type = 'hidden';
+     document.getElementById('editClientEmail2Mobile').type = 'button';
+   }
+
+   document.getElementById('editProductsMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientProdOXMobile').disabled = false;
+       document.getElementById('clientProdPPMobile').disabled = false;
+       document.getElementById('clientProdTPMobile').disabled = false;
+       document.getElementById('updateProductsMobile').type = 'button';
+       document.getElementById('editProductsMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateProductsMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientProdOXMobile').disabled = true;
+     document.getElementById('clientProdPPMobile').disabled = true;
+     document.getElementById('clientProdTPMobile').disabled = true;
+     document.getElementById('updateProductsMobile').type = 'hidden';
+     document.getElementById('editProductsMobile').type = 'button';
+   }
+
+   document.getElementById('editClientNotesMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientNotesMobile').readOnly = false;
+       document.getElementById('updateClientNotesMobile').type = 'button';
+       document.getElementById('editClientNotesMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientNotesMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientNotesMobile').readOnly = true;
+     document.getElementById('updateClientNotesMobile').type = 'hidden';
+     document.getElementById('editClientNotesMobile').type = 'button';
+   }
+
+   document.getElementById('editClientStatusMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('clientStatusMobile').disabled = false;
+       document.getElementById('updateClientStatusMobile').type = 'button';
+       document.getElementById('editClientStatusMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+
+   document.getElementById('updateClientStatusMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('clientStatusMobile').disabled = true;
+     document.getElementById('updateClientStatusMobile').type = 'hidden';
+     document.getElementById('editClientStatusMobile').type = 'button';
+   }
+ }
+   </script>
+
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main mt-0 mx-3">
+              <h2>View/Edit Client</h2>
+              <hr>
+                <h4> Client Information</h4>
+                <form id="formEditClient" name="viewClient" method="post" action="/viewClient" onsubmit="enableFields()">
+                <input type="name" class="form-control" id="origClientName" name="origClientName" value="<%= clientName %>" hidden>
+                <input type="name" class="form-control" id="user" name="user" value="<%- user %>" hidden>
+                <div class="table d-none d-md-block">
+                  <table class="table table-bordered px-2 py-2 bg-white" id="clientInfoTable" onclick="">
+                    <tbody>
+                      <tr>
+                        <th style="width: 15%" scope="col" class="align-middle">Client Name:</th>
+                        <td>
+                          <input type="text" class="form-control" id="newClientName" name="newClientName" value = "<%= result.client[0].clientName %>" required readonly>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientName" value="edit"></input>
+                          <input type="hidden" id="updateClientName" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Contacts:</th>
+                        <td class="align-middle">
+                        <%
+                          var contactList ='';
+                          for (i = 0; i < result.contact.length; i++) {
+                            contactList += result.contact[i].contactFirstName + ' ' + result.contact[i].contactLastName;
+                            if (i < (result.contact.length - 1)){
+                              contactList += '<br>';
+                            }
+                          }
+                        %>
+                        <%- contactList -%>
+                        </td>
+                        <td></td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row" class="align-middle">Agent Assigment:</th>
+                        <td class="align-middle">
+                            <select class="form-control" id="agentAbbrev" name="agentAbbrev" disabled required>
+                              <%
+                                  var list = '';
+                                  for (i = 0; i < result.agents.length; i++) {
+                                    if (result.agents[i].agentAbbrev == result.client[0].agentAbbrev){
+                                      list += '<option selected>' + result.agents[i].agentAbbrev + '</option>';
+                                    } else {
+                                      list += '<option>' + result.agents[i].agentAbbrev + '</option>';
+                                  }
+
+                                  }
+                              %>
+                                <%- list %>
+                            </select>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editAgentAbbrev" value="edit"></input>
+                          <input type="hidden" id="updateAgentAbbrev" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Phone Number/s:</th>
+                        <td class="align-middle">
+                            <input type="text" class="form-control" id="clientPhone" name="clientPhone" value = "<%= result.client[0].clientPhone %>" required readonly>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientPhone" value="edit"></input>
+                          <input type="hidden" id="updateClientPhone" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Fax Number/s:</th>
+                        <td class="align-middle">
+                          <input type="name" class="form-control" id="clientFax" name="clientFax" value = "<%= result.client[0].clientFax %>" readonly>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientFax" value="edit"></input>
+                          <input type="hidden" id="updateClientFax" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Client Address 1:</th>
+                        <td class="align-middle">
+                          <input type="name" class="form-control" id="clientAddress1" name="clientAddress1" value = "<%= result.client[0].clientAddress1.addr %>" required readonly>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientAddress1" value="edit"></input>
+                          <input type="hidden" id="updateClientAddress1" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Client Address 1 Type:</th>
+                        <td class="align-middle">
+                          <select class="form-control" id="clientAddress1type" name="clientAddress1type" disabled required>
+                            <%
+                            var address1List = '';
+                              if(result.client[0].clientAddress1.type == "Contact Address"){
+                                address1List += '<option selected>Contact Address</option>';
+                                address1List += '<option>Delivery Address</option>';
+                            } else {
+                                address1List += '<option>Contact Address</option>';
+                                address1List += '<option selected>Delivery Address</option>';
+                            }
+                            %>
+                            <%- address1List %>
+                          </select>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientAddress1type" value="edit"></input>
+                          <input type="hidden" id="updateClientAddress1type" value="Save"></input>
+                        </td>
+                      </tr>                <tr>
+                        <th scope="row" class="align-middle">Client Address 2:</th>
+                        <td class="align-middle">
+                          <input type="name" class="form-control" id="clientAddress2" name="clientAddress2" value = "<%= result.client[0].clientAddress2.addr %>" readonly>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientAddress2" value="edit"></input>
+                          <input type="hidden" id="updateClientAddress2" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Client Address 2 Type:</th>
+                        <td class="align-middle">
+                          <select class="form-control" id="clientAddress2type" name="clientAddress2type" disabled>
+                            <%
+                            var address2List = '';
+                              if(result.client[0].clientAddress2.type == "Contact Address"){
+                                address2List += '<option selected>Contact Address</option>';
+                                address2List += '<option>Delivery Address</option>';
+                                address2List += '<option></option>';
+                            } else if (result.client[0].clientAddress2.type == "Delivery Address") {
+                                address2List += '<option>Contact Address</option>';
+                                address2List += '<option selected>Delivery Address</option>';
+                                address2List += '<option></option>';
+                            } else {
+                                address2List += '<option>Contact Address</option>';
+                                address2List += '<option>Delivery Address</option>';
+                                address2List += '<option selected></option>';
+                            }
+                            %>
+                            <%- address2List %>
+                          </select>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientAddress2type" value="edit"></input>
+                          <input type="hidden" id="updateClientAddress2type" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Client Address 3:</th>
+                        <td class="align-middle">
+                          <input type="name" class="form-control" id="clientAddress3" name="clientAddress3" value = "<%= result.client[0].clientAddress3.addr %>" readonly>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientAddress3" value="edit"></input>
+                          <input type="hidden" id="updateClientAddress3" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Client Address 3 Type:</th>
+                        <td class="align-middle">
+                          <select class="form-control" id="clientAddress3type" name="clientAddress3type" disabled>
+                            <%
+                            var address3List = '';
+                              if(result.client[0].clientAddress3.type == "Contact Address"){
+                                address3List += '<option selected>Contact Address</option>';
+                                address3List += '<option>Delivery Address</option>';
+                                address3List += '<option></option>';
+                            } else if (result.client[0].clientAddress3.type == "Delivery Address") {
+                                address3List += '<option>Contact Address</option>';
+                                address3List += '<option selected>Delivery Address</option>';
+                                address3List += '<option></option>';
+                            } else {
+                                address3List += '<option>Contact Address</option>';
+                                address3List += '<option>Delivery Address</option>';
+                                address3List += '<option selected></option>';
+                            }
+                            %>
+                            <%- address3List %>
+                          </select>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientAddress3type" value="edit"></input>
+                          <input type="hidden" id="updateClientAddress3type" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Client Address 4:</th>
+                        <td class="align-middle">
+                          <input type="name" class="form-control" id="clientAddress4" name="clientAddress4" value = "<%= result.client[0].clientAddress4.addr %>" readonly>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientAddress4" value="edit"></input>
+                          <input type="hidden" id="updateClientAddress4" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Client Address 4 Type:</th>
+                        <td class="align-middle">
+                          <select class="form-control" id="clientAddress4type" name="clientAddress4type" disabled>
+                            <%
+                            var address4List = '';
+                              if(result.client[0].clientAddress4.type == "Contact Address"){
+                                address4List += '<option selected>Contact Address</option>';
+                                address4List += '<option>Delivery Address</option>';
+                                address4List += '<option></option>';
+                            } else if (result.client[0].clientAddress4.type == "Delivery Address") {
+                                address4List += '<option>Contact Address</option>';
+                                address4List += '<option selected>Delivery Address</option>';
+                                address4List += '<option></option>';
+                            } else {
+                                address4List += '<option>Contact Address</option>';
+                                address4List += '<option>Delivery Address</option>';
+                                address4List += '<option selected></option>';
+                            }
+                            %>
+                            <%- address4List %>
+                          </select>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientAddress4type" value="edit"></input>
+                          <input type="hidden" id="updateClientAddress4type" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Email Address 1:</th>
+                        <td class="align-middle">
+                          <input type="email" class="form-control" id="clientEmail1" name="clientEmail1" value = "<%= result.client[0].clientEmail1 %>" readonly>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientEmail1" value="edit"></input>
+                          <input type="hidden" id="updateClientEmail1" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Email Address 2:</th>
+                        <td class="align-middle">
+                          <input type="email" class="form-control" id="clientEmail2" name="clientEmail2" value = "<%= result.client[0].clientEmail2 %>" readonly>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientEmail2" value="edit"></input>
+                          <input type="hidden" id="updateClientEmail2" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Client Products:</th>
+                        <td class="align-center" style="padding-left: 35px">
+                          <%
+                            var productList = '';
+                            if(result.client[0].clientProdOX == "true"){
+                              productList += '<input class="form-check-input" type="checkbox" id="clientProdOX" name="clientProdOX" value="true"  checked disabled>';
+                            }else{
+                              productList += '<input class="form-check-input" type="checkbox" id="clientProdOX" name="clientProdOX" value="true"  disabled>';
+                            }
+                            productList += '<label class="form-check-label" for="clientProdOX">OX</label>';
+                            productList += '<br>';
+                            if(result.client[0].clientProdPP == "true"){
+                              productList += '<input class="form-check-input" type="checkbox" id="clientProdPP" name="clientProdPP" value="true" checked disabled>';
+                            }else{
+                              productList += '<input class="form-check-input" type="checkbox" id="clientProdPP" name="clientProdPP" value="true" disabled>';
+                            }
+                            productList += '<label class="form-check-label" for="clientProdPP">PP</label>';
+                            productList += '<br>';
+                            if(result.client[0].clientProdTP == "true"){
+                              productList += '<input class="form-check-input" type="checkbox" id="clientProdTP" name="clientProdTP" value="true" checked disabled>';
+                            }else{
+                              productList += '<input class="form-check-input" type="checkbox" id="clientProdTP" name="clientProdTP" value="true" disabled>';
+                            }
+                            productList += '<label class="form-check-label" for="clientProdTP">TP</label>';
+                          %>
+                          <%- productList %>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editProducts" value="edit"></input>
+                          <input type="hidden" id="updateProducts" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Notes:</th>
+                        <td class="align-middle">
+                          <textarea class="form-control" id="clientNotes" name="clientNotes" rows="3" readonly><%=result.client[0].clientNotes %></textarea>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientNotes" value="edit"></input>
+                          <input type="hidden" id="updateClientNotes" value="Save"></input>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="align-middle">Status:</th>
+                        <td class="align-middle">
+                          <select type="name" class="form-control" id="clientStatus" name="clientStatus" disabled required>
+                            <%
+                            var statusList = '';
+                              if(result.client[0].clientActive == "Enabled"){
+                                statusList += '<option selected>Enabled</option>';
+                                statusList += '<option>Disabled</option>';
+                            } else {
+                                statusList += '<option>Enabled</option>';
+                                statusList += '<option selected>Disabled</option>';
+                            }
+                            %>
+                            <%- statusList %>
+                          </select>
+                        </td>
+                        <td style="width: 5%; text-align:center" class="align-middle">
+                          <input type="button" id="editClientStatus" value="edit"></input>
+                          <input type="hidden" id="updateClientStatus" value="Save"></input>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button type="submit" class="btn btn-primary btn-lg" id="submit" name="submit">Submit</button>
+                  <input style="visibility: hidden" id="isEditing" name ="isEditing" value="false">
+                  </div>
+                </form>
+
+
+                <!-- Mobile View of Data -->
+                          <div class="table d-block d-sm-none">
+                          <form id="formEditClient" name="viewClient" method="post" action="/viewClient" onsubmit="enableFields()">
+                          <input type="name" class="form-control" id="origClientName" name="origClientName" value="<%= clientName %>" hidden>
+                          <input type="name" class="form-control" id="user" name="user" value="<%- user %>" hidden>
+                            <table class="table bg-white">
+                              <tbody>
+                    <!-- Mobile View Client Name -->
+                                <tr>
+                                  <th class="px-3" style="text-align:left">Client Name</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientNameMobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientNameMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 style="width: 100%" class="align-middle">
+                                    <input style="width:100%" type="text" class="form-control" id="newClientNameMobile" name="newClientName" value = "<%= result.client[0].clientName %>" required readonly>
+                                  </td>
+                                </tr>
+                    <!-- Mobile View Agent Assignment -->
+                                <tr>
+                                  <th style="text-align:left">Agent Assignment</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editAgentAbbrevMobile" value="edit"></input>
+                                    <input type="hidden" id="updateAgentAbbrevMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                  <select class="form-control" id="agentAbbrevMobile" name="agentAbbrev" disabled required>
+                                    <%
+                                        var list = '';
+                                        for (i = 0; i < result.agents.length; i++) {
+                                          if (result.agents[i].agentAbbrev == result.client[0].agentAbbrev){
+                                            list += '<option selected>' + result.agents[i].agentAbbrev + '</option>';
+                                          } else {
+                                            list += '<option>' + result.agents[i].agentAbbrev + '</option>';
+                                        }
+
+                                        }
+                                    %>
+                                      <%- list %>
+                                  </select>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Phone Numbers -->
+                                <tr>
+                                  <th style="text-align:left">Phone Number/s</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientPhoneMobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientPhoneMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <input type="text" class="form-control" id="clientPhoneMobile" name="clientPhone" value = "<%= result.client[0].clientPhone %>" required readonly>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Fax Numbers -->
+                                <tr>
+                                  <th style="text-align:left">Fax Number/s</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientFaxMobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientFaxMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <input type="name" class="form-control" id="clientFaxMobile" name="clientFax" value = "<%= result.client[0].clientFax %>" readonly>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Client Address 1 -->
+                                <tr>
+                                  <th style="text-align:left">Client Address 1</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientAddress1Mobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientAddress1Mobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <input type="name" class="form-control" id="clientAddress1Mobile" name="clientAddress1" value = "<%= result.client[0].clientAddress1.addr %>" required readonly>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Client Address 1 Type-->
+                                <tr>
+                                  <th style="text-align:left">Client Address 1 Type</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientAddress1typeMobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientAddress1typeMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                  <select class="form-control" id="clientAddress1typeMobile" name="clientAddress1type" disabled required>
+                                    <%
+                                    var address1List = '';
+                                      if(result.client[0].clientAddress1.type == "Contact Address"){
+                                        address1List += '<option selected>Contact Address</option>';
+                                        address1List += '<option>Delivery Address</option>';
+                                    } else {
+                                        address1List += '<option>Contact Address</option>';
+                                        address1List += '<option selected>Delivery Address</option>';
+                                    }
+                                    %>
+                                    <%- address1List %>
+                                  </select>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Client Address 2 -->
+                                <tr>
+                                  <th style="text-align:left">Client Address 2</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientAddress2Mobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientAddress2Mobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <input type="name" class="form-control" id="clientAddress2Mobile" name="clientAddress2" value = "<%= result.client[0].clientAddress2.addr %>" required readonly>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Client Address 2 Type-->
+                                <tr>
+                                  <th style="text-align:left">Client Address 2 Type</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientAddress2typeMobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientAddress2typeMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <select class="form-control" id="clientAddress2typeMobile" name="clientAddress2type" disabled>
+                                      <%
+                                      var address2List = '';
+                                        if(result.client[0].clientAddress2.type == "Contact Address"){
+                                          address2List += '<option selected>Contact Address</option>';
+                                          address2List += '<option>Delivery Address</option>';
+                                          address2List += '<option></option>';
+                                      } else if (result.client[0].clientAddress2.type == "Delivery Address") {
+                                          address2List += '<option>Contact Address</option>';
+                                          address2List += '<option selected>Delivery Address</option>';
+                                          address2List += '<option></option>';
+                                      } else {
+                                          address2List += '<option>Contact Address</option>';
+                                          address2List += '<option>Delivery Address</option>';
+                                          address2List += '<option selected></option>';
+                                      }
+                                      %>
+                                      <%- address2List %>
+                                    </select>
+                                  </td>
+                                </tr>
+                        <!-- Mobile View Client Address 3 -->
+                                <tr>
+                                  <th style="text-align:left">Client Address 3</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientAddress3Mobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientAddress3Mobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <input type="name" class="form-control" id="clientAddress3Mobile" name="clientAddress3" value = "<%= result.client[0].clientAddress3.addr %>" required readonly>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Client Address 3 Type-->
+                                <tr>
+                                  <th style="text-align:left">Client Address 3 Type</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientAddress3typeMobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientAddress3typeMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <select class="form-control" id="clientAddress3typeMobile" name="clientAddress3type" disabled>
+                                      <%
+                                      var address3List = '';
+                                        if(result.client[0].clientAddress3.type == "Contact Address"){
+                                          address3List += '<option selected>Contact Address</option>';
+                                          address3List += '<option>Delivery Address</option>';
+                                          address3List += '<option></option>';
+                                      } else if (result.client[0].clientAddress3.type == "Delivery Address") {
+                                          address3List += '<option>Contact Address</option>';
+                                          address3List += '<option selected>Delivery Address</option>';
+                                          address3List += '<option></option>';
+                                      } else {
+                                          address3List += '<option>Contact Address</option>';
+                                          address3List += '<option>Delivery Address</option>';
+                                          address3List += '<option selected></option>';
+                                      }
+                                      %>
+                                      <%- address3List %>
+                                    </select>
+                                  </td>
+                                </tr>
+                        <!-- Mobile View Client Address 4 -->
+                                <tr>
+                                  <th style="text-align:left">Client Address 4</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientAddress4Mobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientAddress4Mobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <input type="name" class="form-control" id="clientAddress4Mobile" name="clientAddress4" value = "<%= result.client[0].clientAddress4.addr %>" required readonly>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Client Address 4 Type-->
+                                <tr>
+                                  <th style="text-align:left">Client Address 4 Type</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientAddress4typeMobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientAddress4typeMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <select class="form-control" id="clientAddress4typeMobile" name="clientAddress4type" disabled>
+                                      <%
+                                      var address4List = '';
+                                        if(result.client[0].clientAddress4.type == "Contact Address"){
+                                          address4List += '<option selected>Contact Address</option>';
+                                          address4List += '<option>Delivery Address</option>';
+                                          address4List += '<option></option>';
+                                      } else if (result.client[0].clientAddress4.type == "Delivery Address") {
+                                          address4List += '<option>Contact Address</option>';
+                                          address4List += '<option selected>Delivery Address</option>';
+                                          address4List += '<option></option>';
+                                      } else {
+                                          address4List += '<option>Contact Address</option>';
+                                          address4List += '<option>Delivery Address</option>';
+                                          address4List += '<option selected></option>';
+                                      }
+                                      %>
+                                      <%- address4List %>
+                                    </select>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Email Address 1-->
+                                <tr>
+                                  <th style="text-align:left">Email Address 1</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientEmail1Mobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientEmail1Mobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <input type="email" class="form-control" id="clientEmail1Mobile" name="clientEmail1" value = "<%= result.client[0].clientEmail1 %>" readonly>
+                                  </td>
+                                </tr>
+                      <!-- Mobile View Email Address 2-->
+                                <tr>
+                                  <th style="text-align:left">Email Address 2</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                    <input type="button" id="editClientEmail2Mobile" value="edit"></input>
+                                    <input type="hidden" id="updateClientEmail2Mobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <input type="email" class="form-control" id="clientEmail2Mobile" name="clientEmail2" value = "<%= result.client[0].clientEmail2 %>" readonly>
+                                </tr>
+                      <!-- Mobile View Client Products-->
+                                <tr>
+                                  <th style="text-align:left">Client Products</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                  <input type="button" id="editProductsMobile" value="edit"></input>
+                                  <input type="hidden" id="updateProductsMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row" style="padding-left: 40px">
+                                  <%
+                                    var productList = '';
+                                    if(result.client[0].clientProdOX == "true"){
+                                      productList += '<input class="form-check-input" type="checkbox" id="clientProdOXMobile" name="clientProdOX" value="true"  checked disabled>';
+                                    }else{
+                                      productList += '<input class="form-check-input" type="checkbox" id="clientProdOXMobile" name="clientProdOX" value="true"  disabled>';
+                                    }
+                                    productList += '<label class="form-check-label" for="clientProdOX">OX</label>';
+                                    productList += '<br>';
+                                    if(result.client[0].clientProdPP == "true"){
+                                      productList += '<input class="form-check-input" type="checkbox" id="clientProdPPMobile" name="clientProdPP" value="true" checked disabled>';
+                                    }else{
+                                      productList += '<input class="form-check-input" type="checkbox" id="clientProdPPMobile" name="clientProdPP" value="true" disabled>';
+                                    }
+                                    productList += '<label class="form-check-label" for="clientProdPP">PP</label>';
+                                    productList += '<br>';
+                                    if(result.client[0].clientProdTP == "true"){
+                                      productList += '<input class="form-check-input" type="checkbox" id="clientProdTPMobile" name="clientProdTP" value="true" checked disabled>';
+                                    }else{
+                                      productList += '<input class="form-check-input" type="checkbox" id="clientProdTPMobile" name="clientProdTP" value="true" disabled>';
+                                    }
+                                    productList += '<label class="form-check-label" for="clientProdTP">TP</label>';
+                                  %>
+                                  <%- productList %>
+                                </tr>
+                      <!-- Mobile View Client Notes-->
+                                <tr>
+                                  <th style="text-align:left">Remarks</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                  <input type="button" id="editClientNotesMobile" value="edit"></input>
+                                  <input type="hidden" id="updateClientNotesMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <textarea class="form-control" id="clientNotesMobile" name="clientNotes" rows="3" readonly><%=result.client[0].clientNotes %></textarea>
+                                </tr>
+                      <!-- Mobile View Client Status-->
+                                <tr>
+                                  <th style="text-align:left">Status</th>
+                                  <th style="width: 16.66%" class="align-middle">
+                                  <input type="button" id="editClientStatusMobile" value="edit"></input>
+                                  <input type="hidden" id="updateClientStatusMobile" value="Save"></input>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <td colspan=2 scope="row">
+                                    <select type="name" class="form-control" id="clientStatusMobile" name="clientStatus" disabled required>
+                                      <%
+                                      var statusList = '';
+                                        if(result.client[0].clientActive == "Enabled"){
+                                          statusList += '<option selected>Enabled</option>';
+                                          statusList += '<option>Disabled</option>';
+                                      } else {
+                                          statusList += '<option>Enabled</option>';
+                                          statusList += '<option selected>Disabled</option>';
+                                      }
+                                      %>
+                                      <%- statusList %>
+                                    </select>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <div class="row">
+                              <div class="col-12 col-md-auto">
+                                <button type="submit" class="btn-block btn-primary btn-lg" id="submit" name="submit">Submit</button>
+                                <input style="visibility: hidden" id="isEditing" name ="isEditing" value="false">
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+
+                <script>
+                  function enableFields() {
+                    //if desktop
+                    document.getElementById('agentAbbrev').disabled = false;
+                    document.getElementById('newClientName').disabled = false;
+                    document.getElementById('clientAddress1type').disabled = false;
+                    document.getElementById('clientAddress2type').disabled = false;
+                    document.getElementById('clientAddress3type').disabled = false;
+                    document.getElementById('clientAddress4type').disabled = false;
+                    document.getElementById('clientProdOX').disabled = false;
+                    document.getElementById('clientProdPP').disabled = false;
+                    document.getElementById('clientProdTP').disabled = false;
+                    document.getElementById('clientStatus').disabled = false;
+                    //if mobile
+                    document.getElementById('agentAbbrevMobile').disabled = false;
+                    document.getElementById('newClientNameMobile').disabled = false;
+                    document.getElementById('clientAddress1typeMobile').disabled = false;
+                    document.getElementById('clientAddress2typeMobile').disabled = false;
+                    document.getElementById('clientAddress3typeMobile').disabled = false;
+                    document.getElementById('clientAddress4typeMobile').disabled = false;
+                    document.getElementById('clientProdOXMobile').disabled = false;
+                    document.getElementById('clientProdPPMobile').disabled = false;
+                    document.getElementById('clientProdTPMobile').disabled = false;
+                    document.getElementById('clientStatusMobile').disabled = false;
+                  }
+                </script>
+                <script>
+                  function hideTableElems() {
+                    var tbl = document.getElementById("clientInfoTable").rows;
+                    for (r = 0; r < 7; r++){ //tbl.length; r++){
+                        alert(tbl[r].cells[1].innerHTML);
+                    }
+                  }
+                </script>
+
+<hr>
+    <!-- Contact History Snapshot - thinking maybe last 5 entries -->
+                <h4> Communication History</h4>
+                <div class="d-none d-md-block table-responsive">
+                  <table class="table table-bordered bg-white">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col" style="text-align: center; vertical-align: middle; width: 5%"></th>
+                        <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">DATE</th>
+                        <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">AGENT</th>
+                        <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">CONTACT 1</th>
+                        <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">CONTACT 2</th>
+                        <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">VISIT TYPE</th>
+                        <th scope="col" style="width: 45%">REMARKS</th>
+                      </tr>
+                    </thead>
+                    <tr>
+                      <%
+                        var eventsList ='';
+                        var k = 1;
+                        var repContact1 = [];
+                        var repContact2 = [];
+                        for (i = 0; i < result.events.length; i++) {
+                        k = i + 1;
+                        if (result.events[i].contact1 === null){
+                          repContact1.push("NA");
+                        } else{
+                          repContact1.push(result.events[i].contact1);
+                        }
+                        if (result.events[i].contact2 === null){
+                          repContact2.push("NA");
+                        } else{
+                          repContact2.push(result.events[i].contact2);
+                        }
+                          eventsList += '<th scope="row" style="text-align: center; vertical-align: middle; width: 5%">' + k + '</th>';
+                          var str = result.events[i].eventTimeIn._i.toString();
+                          var str = str.substr(0,10);
+                          eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + str + '</td>';
+                          eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + result.events[i].agentAbbrev + '</td>';
+                          eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + repContact1[i] + '</td>';
+                          eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + repContact2[i] + '</td>';
+                          eventsList += '<td style="text-align: center; vertical-align: middle; width: 10%">' + result.events[i].eventType + '</td>';
+                          eventsList += '<td style="text-align: left; vertical-align: middle">' + result.events[i].eventRemarks + '</td>';
+                          eventsList += '</tr>';
+                      }
+                      %>
+                      <%- eventsList %>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

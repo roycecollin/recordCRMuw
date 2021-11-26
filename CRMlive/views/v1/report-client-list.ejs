@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='https://unpkg.com/@coreui/coreui@2.1.16/dist/css/coreui.min.css' />
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+  </head>
+
+<body class="app sidebar-show aside-menu-show">
+
+  <header class="app-header navbar">
+    <% include partials/header %>
+  </header>
+
+  <div class="app-body">
+
+    <div class="sidebar">
+      <% include partials/sidebar %>
+    </div>
+
+    <main class="main mt-2 mx-3">
+      <form id="formClientList" name="formClientList" method="post" action="/result-client-list-report">
+        <div class="card w-auto">
+          <h3 class="card-header">Client List Report</h3>
+          <div class="card-body">
+
+      <!-- Select Agent from Prepopulated list of options -->
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <label for="agentSelect">Agent</label>
+                  <select class="form-control" name ="agentAbbrev" id="agentAbbrev">
+                    <%
+                        var list = '<option value="" disabled selected>Select</option>';
+                        for (i = 0; i < agentList.length; i++) {
+                          list += '<option>' + agentList[i].agentAbbrev + '</option>';
+                        }
+                    %>
+                      <%- list %>
+                  </select>
+                </div>
+              </div>
+
+      <!-- Submit Button to execute -->
+              <div class="form-row">
+                <div class="form-group col">
+                  <input class="btn btn-primary" type="submit" value="Submit">
+                </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+    </main>
+
+    <aside class="aside-menu-hidden">
+      <!-- Aside menu content here -->
+    </aside>
+
+  </div>
+  <footer class="app-footer">
+    <% include partials/footer %>
+  </footer>
+</body>
+</html>

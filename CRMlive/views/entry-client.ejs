@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+ <title>CRM - Client Entry</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+        <!-- Main content here -->
+      <main class="c-main">
+        <main class="main mt-0 mx-3">
+
+          <h2>Client Entry Form</h2>
+          <hr>
+          <form id="formAddClient" name="addClient" method="post" action="/addClient">
+
+          <!-- Client Name & Agent Assignment-->
+
+            <div class="form-row">
+              <div class="form-group col-12 col-md-auto">
+                <label for="clientName">Client Name</label>
+                <input type="name" class="form-control" id="clientName" name="clientName" placeholder="Company Name" required>
+              </div>
+                <div class="form-group col-12 col-md-auto">
+                  <label for="agentName">Agent Assignment</label>
+                  <select class="form-control" id="agentAbbrev" name="agentAbbrev" required>
+              		<%
+                      var sortedAgents = agentList.sort(function(a,b){
+                          if (a.agentAbbrev > b.agentAbbrev) { return 1;}
+                          if (a.agentAbbrev < b.agentAbbrev) {return -1;}
+                          return 0;
+                      });
+                      var list = '<option value="" disabled selected>Select</option>';
+                    	for (i = 0; i < sortedAgents.length; i++) {
+                    		list += '<option>' + sortedAgents[i].agentAbbrev + '</option>';
+                    	}
+              		%>
+                  	<%- list %>
+            	  </select>
+                </div>
+            </div>
+
+          <!-- Client Contact Numbers-->
+          <div class="form-row">
+            <div class="form-group col-12 col-md-auto">
+              <label for="clientPhone">Client Contact Number</label>
+              <input type="text" class="form-control" id="clientPhone" name="clientPhone" placeholder="Phone Number">
+            </div>
+            <div class="form-group col-12 col-md-auto">
+              <label for="clientFax">Client Fax Number</label>
+              <input type="text" class="form-control" id="clientFax" name="clientFax" placeholder="Fax Number">
+            </div>
+          </div>
+
+          <!-- Client Addresses-->
+            <label for="clientAddresses">Client Addresses</label>
+              <div class="form-row">
+          			<div class="form-group col-12 col-md-auto">
+          			  <textarea class="form-control mb-1" id="clientAddress1" name="clientAddress1" placeholder="Company Address 1" rows="3" required></textarea>
+                  <select class="form-control" id="clientAddress1Type" name="clientAddress1Type" required>
+                    <option value="" disabled selected>Select</option>
+                    <option>Contact Address</option>
+                    <option>Delivery Address</option>
+                  </select>
+                </div>
+                <div class="form-group col-12 col-md-auto">
+                  <textarea class="form-control mb-1" id="clientAddress2" name="clientAddress2" placeholder="Company Address 2 (if applicable)" rows="3"></textarea>
+                    <select class="form-control" id="clientAddress2Type" name="clientAddress2Type">
+                      <option></option>
+                      <option>Contact Address</option>
+                      <option>Delivery Address</option>
+                  </select>
+          			</div>
+          			<div class="form-group col-12 col-md-auto">
+          			  <textarea class="form-control mb-1" id="clientAddress3" name="clientAddress3" placeholder="Company Address 3 (if applicable)" rows="3"></textarea>
+                    <select class="form-control" id="clientAddress3Type" name="clientAddress3Type">
+                      <option></option>
+                      <option>Contact Address</option>
+                      <option>Delivery Address</option>
+                  </select>
+          			</div>
+                <div class="form-group col-12 col-md-auto">
+          			  <textarea class="form-control mb-1" id="clientAddress4" name="clientAddress4" placeholder="Company Address 4 (if applicable)" rows="3"></textarea>
+                    <select class="form-control" id="clientAddress4Type" name="clientAddress4Type">
+                      <option></option>
+                      <option>Contact Address</option>
+                      <option>Delivery Address</option>
+                  </select>
+          			</div>
+          	</div>
+
+
+          <!-- Client Email Address-->
+            <label for="inputAddress">Client Email Addresses</label>
+            <div class="form-row">
+          			<div class="form-group col-12 col-md-auto">
+          			  <input type="email" class="form-control" id="clientEmail1" name="clientEmail1" placeholder="user1@email.com">
+          			</div>
+          			<div class="form-group col-12 col-md-auto">
+          			  <input type="email" class="form-control" id="clientEmail2" name="clientEmail2" placeholder="user2@email.com">
+          			</div>
+          	</div>
+
+          <!-- Client Products-->
+          <div class="form-group">
+            <label for="clientProducts">Client Products</label>
+          	<div class="form-row">
+              <div class="col-auto">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="clientProdOX" value="true">
+                  <label class="form-check-label" for="clientProdOX">OX</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="clientProdPP" value="true">
+                  <label class="form-check-label" for="clientProdPP">PP</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="clientProdTP" value="true">
+                  <label class="form-check-label" for="clientProdTP">TP</label>
+                </div>
+              </div>
+          	</div>
+          </div>
+
+          <!-- Client Notes-->
+          <div class="form-group">
+            <label for="clientNotes">Client Notes</label>
+              <div class="form-row">
+          		<div class="form-group col-12 col-md-4">
+          			<textarea class="form-control" name="clientNotes" rows="3" placeholder="Remarks"></textarea>
+          		</div>
+          	</div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-auto">
+              <button type="submit" class="btn-block btn-primary btn-lg">Submit</button>
+            </div>
+          </div>
+
+          </form>
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+ <title>CRM - Import Client</title>
+ </head>
+ <body class="c-app">
+
+  <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+    <% include partials/sidebar %>
+  </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main mt-0 mx-3">
+              <h2>Import Client Tool</h2>
+              <hr>
+            <h4> Instructions: </h4>
+            <ul>
+              <li> Download the template file: <a href="/files/clients.csv" download>Clients.csv</a></li>
+              <li> Populate table with Client information.</li>
+              <li> Delete Sample Data included </li>
+              <li> It is important that you do not change the column names </li>
+              <li> <strong>NOTE:</strong> Any fields with commas should be surronded by Double Quotes. <br/> <b>Example</b>: "1600 Pennsylvania Ave NW, Washington, DC"</li>
+              <li><strong>OPTIONAL:</strong> Define the default field entries for upload</li>
+              <li> Upload the file, click submit and review the information on the next page.</li>
+            </ul>
+            <br>
+            <h4> Example Data: </h4>
+            <h6><a href="/files/clients.csv" download>Download Template CSV File</a></h6>
+          <div class="table-responsive text-nowrap">
+              <table class="table table-bordered px-2 py-2 bg-white">
+                <thead>
+                  <tr>
+                    <th scope="col" class="align-middle">Client Name</th>
+                    <th scope="col" class="align-middle">Client Phone</th>
+                    <th scope="col" class="align-middle">Client Fax</th>
+                    <th scope="col" class="align-middle">Client Address 1</th>
+                    <th scope="col" class="align-middle">Client Address 2</th>
+                    <th scope="col" class="align-middle">Client Address 3</th>
+                    <th scope="col" class="align-middle">Client Address 4</th>
+                    <th scope="col" class="align-middle">Client Email 1</th>
+                    <th scope="col" class="align-middle">Client Email 2</th>
+                    <th scope="col" class="align-middle">Client Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Acme Corporation</td>
+                    <td>123-4567</td>
+                    <td>321-7654</td>
+                    <td>"111 Wellington St, Ottawa, ON"</td>
+                    <td>"1600 Pennsylvania Ave NW, Washington, DC"</td>
+                    <td></td>
+                    <td></td>
+                    <td>info@acmecorporation.com</td>
+                    <td></td>
+                    <td>This is a sample data set</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <br>
+           <form action="/import-client" method="post" enctype="multipart/form-data">
+              <h4> Default Values: </h4>
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label>Agent Abbreviation</label>
+                  <select class="form-control" id="agentAbbrev" name="agentAbbrev">
+                    <%
+                        var sortedAgents = agentList.sort(function(a,b){
+                            if (a.agentAbbrev > b.agentAbbrev) { return 1;}
+                            if (a.agentAbbrev < b.agentAbbrev) {return -1;}
+                            return 0;
+                        });
+                        var list = '<option value="" disabled selected>Select</option>';
+                      	for (i = 0; i < sortedAgents.length; i++) {
+                      		list += '<option>' + sortedAgents[i].agentAbbrev + '</option>';
+                      	}
+                		%>
+                      <%- list %>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label>Client Address 1 Type</label>
+                  <select class="form-control" id="clientAddress1Type" name="clientAddress1Type">
+                    <option></option>
+                    <option>Contact Address</option>
+                    <option>Delivery Address</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label>Client Address 2 Type</label>
+                  <select class="form-control" id="clientAddress2Type" name="clientAddress2Type">
+                    <option></option>
+                    <option>Contact Address</option>
+                    <option>Delivery Address</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label>Client Address 3 Type</label>
+                  <select class="form-control" id="clientAddress3Type" name="clientAddress3Type">
+                    <option></option>
+                    <option>Contact Address</option>
+                    <option>Delivery Address</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label>Client Address 4 Type</label>
+                  <select class="form-control" id="clientAddress4Type" name="clientAddress4Type">
+                    <option></option>
+                    <option>Contact Address</option>
+                    <option>Delivery Address</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label>Client Products</label>
+                  <div class="custom-control custom-checkbox">
+                    <input class="form-check-input" type="checkbox" name="clientProdOX" value="true">
+                    <label class="form-check-label" for="clientProdOX">OX</label>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input class="form-check-input" type="checkbox" name="clientProdPP" value="true">
+                    <label class="form-check-label" for="clientProdPP">PP</label>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input class="form-check-input" type="checkbox" name="clientProdTP" value="true">
+                    <label class="form-check-label" for="clientProdTP">TP</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label>File for Upload</label>
+                  <input type="file" class="form-control-file" name="clientCSV" required>
+                </div>
+              </div>
+
+              <input class="btn btn-primary" type="submit" value="Submit">
+           </form>
+         </div>
+       </div>
+      </div>
+     </div>
+
+       </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

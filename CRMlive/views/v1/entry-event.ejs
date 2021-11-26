@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel='stylesheet' href='https://unpkg.com/@coreui/coreui@2.1.16/dist/css/coreui.min.css' />
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  </head>
+
+<body class="app sidebar-show aside-menu-show">
+
+  <header class="app-header navbar">
+    <% include partials/header2 %>
+  </header>
+
+  <div class="app-body">
+
+    <div class="sidebar">
+      <% include partials/sidebar %>
+    </div>
+
+    <main class="main mt-2 mx-3">
+      <form id="formAddEvent" name="addEvent" method="post" action="/addEvent">
+        <div class="card  w-auto">
+          <h3 class="card-header">Event Information</h3>
+          <div class="card-body">
+      <div class="form-row">
+          <div class="form-group col">
+            <label for="eventDate">Date</label>
+            <input type="date" class="form-control" id="eventDate" name="eventDate" required>
+          </div>
+          <div class="form-group col">
+            <label for="agentID">Agent</label>
+            <select class="form-control" name="agentID">
+            <%
+                var list = '<option value="" disabled selected>Select</option>';
+                for (i = 0; i < locals.agents.length; i++) {
+                  list += '<option>' + locals.agents[i].agentAbbrev + '</option>';
+                }
+            %>
+              <%- list %>
+      	  </select>
+          </div>
+      </div>
+
+      <!-- Event Time In & Out-->
+      <div class="form-row">
+          <div class="form-group col">
+            <label for="eventTimeIn">Time In</label>
+            <input type="time" class="form-control" id="eventTimeIn" name="eventTimeIn" required>
+          </div>
+          <div class="form-group col">
+            <label for="eventTimeOut">Time Out</label>
+            <input type="time" class="form-control" id="eventTimeOut" name="eventTimeOut" required>
+          </div>
+      </div>
+
+      <!-- Client Visited-->
+      <div class="form-row">
+          <div class="form-group col">
+            <label for="clientID">Client</label>
+            <select class="form-control" name="clientID" onChange="changeAgent(this.value);">
+        		<%
+              	var list = '<option value="" disabled selected>Select</option>';
+              	for (i = 0; i < locals.clients.length; i++) {
+              		list += '<option value="' + locals.clients[i].clientName + '">' + locals.clients[i].clientName + '</option>';
+              	}
+        		%>
+            	<%- list %>
+      	  </select>
+      </div>
+      <span id='variableJSON' hidden>
+        <%= JSON.stringify(locals.contacts); %>
+      </span>
+      <script>
+        function changeAgent(value){
+          var contacts = JSON.parse($('#variableJSON').text());
+          var contactOptions = "";
+          contactOptions += "<option>N/A</option>";
+          for (j = 0; j < contacts.length; j++) {
+            if(contacts[j].contactClientID === value) {
+              contactOptions += "<option>" + contacts[j].contactFirstName + " " + contacts[j].contactLastName + "</option>";
+            }
+          }
+          document.getElementById("contactID1").innerHTML = contactOptions;
+          document.getElementById("contactID2").innerHTML = contactOptions;
+        }
+      </script>
+
+      <div class="form-row">
+      <div class="form-group col">
+            <label for="eventType">Visit Type</label>
+            <select class="form-control" name="eventType">
+      		  <option>Collection</option>
+      		  <option>Courtesy Visit</option>
+      		  <option>Technical Service</option>
+      		  <option>Delivery</option>
+      	  </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Visited-->
+      <!-- [TODO] I don't know if I should be referring to the contactID when what I actually want to show up is the contactName. Create a button for Contact(s) visited to pull all contacts with Client = ClientID Above -->
+
+      <div class="form-group">
+        <label for="inputAddress">Contact(s) Visited</label>
+          <div class="form-row">
+      		<div class="form-group col">
+      			<select class="form-control" name="contactID1" id="contactID1">
+              <option value="" disabled selected  required>Select</option>
+            </select>
+      		</div>
+      		<div class="form-group col">
+      			<select class="form-control" name="contactID2" id="contactID2">
+              <option value="" disabled selected>Select</option>
+            </select>
+      		</div>
+      	</div>
+      </div>
+
+      <!-- Event Location/Branch-->
+      <div class="form-group">
+        <label for="eventBranch">Branch Location (If Applicable)</label>
+          <div class="form-row">
+      			<div class="col">
+      			  <input type="text" class="form-control" id="eventBranch" name="eventBranch" placeholder="Location">
+      			</div>
+      	</div>
+      </div>
+
+      <!-- Event Notes-->
+      <div class="form-group">
+        <label for="inputAddress2">Event Notes</label>
+          <div class="form-row">
+      		<div class="col">
+      			<textarea class="form-control" name="eventRemarks" rows="3" placeholder="Remarks" required></textarea>
+      		</div>
+      	</div>
+      </div>
+
+      <input class="btn btn-primary" type="submit" value="Submit">
+      </form>
+
+    </div>
+  </div>
+    </main>
+
+    <aside class="aside-menu-hidden">
+      <!-- Aside menu content here -->
+    </aside>
+
+  </div>
+  <footer class="app-footer">
+    <% include partials/footer %>
+  </footer>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
+</body>
+
+</html>

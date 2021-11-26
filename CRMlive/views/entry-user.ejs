@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+ <title>CRM - Agent Entry</title>
+</head>
+<script>
+  // Function to check Whether both passwords
+  // is same or not.
+  function checkPassword(form) {
+      password1 = form.newPassword.value;
+      password2 = form.newPasswordRetype.value;
+
+      // If password not entered
+      if (password1 == '') {
+          alert ("Please enter Password");
+          return false;
+      }
+
+      // If confirm password not entered
+      else if (password2 == '') {
+          alert ("Please enter confirm password");
+          return false;
+      }
+
+      // If Not same return False.
+      else if (password1 != password2) {
+          alert ("\nPassword did not match: Please try again...")
+          return false;
+      }
+
+      // If same return True.
+      else{
+          return true;
+      }
+  }
+</script>
+
+
+<body class="c-app">
+ <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+   <% include partials/sidebar %>
+ </div>
+ <div class="c-wrapper">
+   <header class="c-header c-header-dark bg-primary c-header-fixed">
+     <!-- Header content here -->
+     <% include partials/header %>
+   </header>
+   <div class="c-body">
+       <!-- Main content here -->
+     <main class="c-main">
+       <main class="main mt-0 mx-3">
+         <h2>User Entry Form</h2>
+         <hr>
+        <form id="formaddUser" name="addUser" method="post" action="/addUser" onSubmit="return checkPassword(this)">
+          <!-- User Information and Type-->
+
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label for="newUserName">Username</label>
+                  <input type="text" class="form-control" id="newUserName" name="newUserName" placeholder="Username"  required>
+                </div>
+                <div class="form-group col-12 col-md-auto">
+                  <label for="newUserType">User Type</label>
+                  <select class="form-control" id="newUserType" name="newUserType" onchange = "EnableDisableBox(this)" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="Administrator">Administrator</option>
+                    <option value="Agent">Agent</option>
+                    <option value="Read-Only">Read-Only</option>
+                  </select>
+                </div>
+                <div class="form-group col-12 col-md-auto">
+                  <label for="agentAbbrev">Agent Abbreviation</label>
+                  <input type="text" class="form-control" id="agentAbbrev" name="agentAbbrev" placeholder="Use All Caps" required disabled>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label for="agentName">First Name</label>
+                  <input type="text" class="form-control" id="agentFirstName" name="agentFirstName" placeholder="First Name" required>
+                </div>
+                <div class="form-group col-12 col-md-auto">
+                  <label for="agentName">Last Name</label>
+                  <input type="text" class="form-control" id="agentLastName" name="agentLastName" placeholder="Last Name" required>
+                </div>
+              </div>
+
+
+              <div class="form-row">
+                <div class="form-group col-12 col-md-auto">
+                  <label for="newPassword">Password</label>
+                  <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Password"  required>
+                </div>
+                <div class="form-group col-12 col-md-auto">
+                  <label for="newPasswordRetype">Re-Type Password</label>
+                  <input type="password" class="form-control" id="newPasswordRetype" name="newPasswordRetype" placeholder="Re-Type Password" required>
+                </div>
+                <div class="form-group col-12 col-md-auto">
+                  <label for="changePW">Change Password on First Login?</label>
+                  <input type="checkbox" class="form-control" id="changePW" name="changePW" >
+                </div>
+              </div>
+
+              <div class="form-row">
+                  <div class="form-group col-12 col-md-auto">
+                    <label for="agentPosition">Position</label>
+                    <select class="form-control" id="agentPosition" name="agentPosition" required>
+                    <option value="" disabled selected>Select</option>
+                    <option>Sales Executive</option>
+                    <option>Office</option>
+                    <option>Sales Manager</option>
+                  </select>
+                  </div>
+              </div>
+
+
+
+            <div class="row">
+              <div class="col-12 col-md-auto">
+                <input class="btn-block btn-primary btn-lg" type="submit" value="Submit">
+              </div>
+            </div>
+          </form>
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ <script type="text/javascript">
+  function EnableDisableBox(newUserType) {
+      var selectedValue = newUserType.options[newUserType.selectedIndex].value;
+
+      var agentAB = document.getElementById("agentAbbrev");
+      agentAB.disabled = selectedValue == "Agent" ? false : true;
+      if (!agentAB.disabled) {
+          agentAB.blur();
+      }
+
+  }
+</script>
+ </body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+ <title>CRM - View Event</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main mt-0 mx-3">
+              <h2>View/Edit Event</h2>
+              <hr>
+              <form id="search-event" name="search-event" method="post" action="/search-event">
+          <!-- Select Agent from Prepopulated list of options -->
+                  <div class="form-row">
+                    <div class="form-group col-12 col-md-auto">
+                      <label for="clientSelect">Select Client</label>
+                      <select class="form-control" name="clientName" id="clientName" required>
+                      <%
+                          var sortedClients = searchEventClients.sort(function(a,b){
+                              if (a.clientName > b.clientName) { return 1;}
+                              if (a.clientName < b.clientName) {return -1;}
+                              return 0;
+                          });
+                          var list = '<option value="" disabled selected>Select</option>';
+                          for (i = 0; i < sortedClients.length; i++) {
+                            list += '<option value="' + sortedClients[i].clientName + '">' + sortedClients[i].clientName + '</option>';
+                          }
+                      %>
+                        <%- list %>
+                    </select>
+                    </div>
+                  </div>
+
+                  <!-- Select Date Range for Data -->
+                        <div class="form-row">
+                          <div class="form-group col-12 col-md-auto">
+                            <label for="inputDateStart">Date Range Start</label>
+                            <input type="date" class="form-control" id="dateStartInput" name="dateStartInput" required>
+                          </div>
+                          <div class="form-group col-12 col-md-auto">
+                            <label for="inputDateEnd">Date Range End</label>
+                            <input type="date" class="form-control" id="dateEndInput" name="dateEndInput" required>
+                          </div>
+                        </div>
+
+          <!-- Submit Button to execute -->
+                  <div class="form-row">
+                    <div class="form-group col">
+                      <div class="row">
+                        <div class="col-12 col-md-auto">
+                          <input class="btn-block btn-primary btn-lg" onclick="goBack()" type="submit" value="Submit">
+
+                          <script>
+                          function goBack() {
+                            window.history.back();
+                          }
+                          </script>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

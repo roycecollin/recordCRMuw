@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Contact List</h1>
+    <ul>
+      <%
+        var list = '';
+        for (i = 0; i < contactList.length; i++) {
+          list += '<li><a href="mailto:' + contactList[i].contactEmail + '">' + contactList[i].contactEmail + '</a></li>';
+        }
+      %>
+      <%- list %>
+    </ul>
+  </body>
+</html>

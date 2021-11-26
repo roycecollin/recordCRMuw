@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+ <title>CRM - View Event</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main my-2 mx-3">
+          <form id="formListEvent" name="list-event" method="post" action="/list-event" onsubmit="enableFields()">
+          <input type="name" class="form-control" id="clientName" name="clientName" value="<%= clientName %>" hidden>
+
+          <h3>List Events</h3>
+
+          <h4> Event Information</h4>
+          <p>Client Name: <%= clientName %></p>
+          <p>Date Range Start: <%= dateStartInput %></p>
+          <p>Date Range End: <%= dateEndInput %></p>
+
+    <!-- Event History Listing -->
+
+          <div class="table-responsive">
+             <table class="table table-bordered bg-white">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">DATE</th>
+                  <th scope="col">AGENT</th>
+                  <th scope="col">CONTACT 1</th>
+                  <th scope="col">CONTACT 2</th>
+                  <th scope="col">VISIT TYPE</th>
+                  <th scope="col">REMARKS</th>
+                </tr>
+              </thead>
+              <tr>
+                <%
+                  var eventsList ='';
+                  for (i = 0; i < result.events.length; i++) {
+                    eventsList += '<th scope="row">' + '<button type="submit" form="formListEvent" name="submit" value=' + result.events[i]._id + '>Edit</button>' + '</th>';
+                    var str = result.events[i].eventTimeIn._i.toString();
+                    var str = str.substr(0,10);
+                    eventsList += '<td>' + str + '</td>';
+                    eventsList += '<td>' + result.events[i].agentAbbrev + '</td>';
+                    eventsList += '<td>' + result.events[i].contact1 + '</td>';
+                    eventsList += '<td>' + result.events[i].contact2 + '</td>';
+                    eventsList += '<td>' + result.events[i].eventType + '</td>';
+                    eventsList += '<td>' + result.events[i].eventRemarks + '</td>';
+                    eventsList += '</tr>';
+                }
+                %>
+                <%- eventsList %>
+              <tbody>
+
+              </tbody>
+            </table>
+            </div>
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

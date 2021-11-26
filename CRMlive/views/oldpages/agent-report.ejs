@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Agent List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Agent List</h1>
+    <ul>
+      <%
+        var list = '';
+        for (i = 0; i < agentList.length; i++) {
+          list += '<li>' + agentList[i].agentAbbrev + '</li>';
+        }
+      %>
+      <%- list %>
+    </ul>
+  </body>
+</html>

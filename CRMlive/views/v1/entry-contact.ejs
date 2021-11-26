@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel='stylesheet' href='https://unpkg.com/@coreui/coreui@2.1.16/dist/css/coreui.min.css' />
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+  </head>
+
+<body class="app sidebar-show aside-menu-show">
+
+  <header class="app-header navbar">
+    <% include partials/header2 %>
+  </header>
+
+  <div class="app-body">
+
+    <div class="sidebar">
+      <% include partials/sidebar %>
+    </div>
+
+    <main class="main mt-2 mx-3">
+      <form id="formAddContact" name="addContact" method="post" action="/addContact">
+      <div class="card  w-auto">
+        <h3 class="card-header">Contact Information</h3>
+        <div class="card-body">
+
+      <div class="form-group">
+            <label for="clientID">Client</label>
+            <select class="form-control" name="clientID">
+        		<%
+              	var list = '<option value="" disabled selected>Select</option>';
+              	for (i = 0; i < clientList.length; i++) {
+              		list += '<option>' + clientList[i].clientName + '</option>';
+              	}
+        		%>
+            	<%- list %>
+      	  </select>
+      </div>
+
+
+
+      <!-- Contact Name-->
+      <div class="form-group">
+        <label for="clientPhone">Contact Name</label>
+          <div class="form-row">
+      			<div class="col-auto">
+      			  <input type="text" class="form-control" id="contactFirstName" name="contactFirstName" placeholder="First Name" required>
+      			</div>
+      			<div class="col-auto">
+      			  <input type="text" class="form-control" id="contactLastName" name="contactLastName" placeholder="Last Name" required>
+      			</div>
+      	</div>
+      </div>
+
+      <!-- Contact Position-->
+      <div class="form-group">
+        <label for="clientPhone">Position</label>
+          <div class="form-row">
+      			<div class="col-auto">
+      			  <input type="text" class="form-control" id="contactPosition" name="contactPosition" placeholder="Position" required>
+      			</div>
+      	</div>
+      </div>
+
+       <!-- Contact Numbers-->
+      <div class="form-group">
+        <label for="clientPhone">Contact Numbers</label>
+          <div class="form-row">
+      			<div class="col-auto">
+      			  <input type="text" class="form-control" id="contactPhone" name="contactPhone" placeholder="Phone Number">
+      			</div>
+      			<div class="col-auto">
+      			  <input type="text" class="form-control" id="contactMobile" name="contactMobile" placeholder="Mobile Number">
+      			</div>
+      	</div>
+      </div>
+
+      <!-- Contact Email Address-->
+      <div class="form-group">
+        <label for="inputAddress">Email Address</label>
+          <div class="form-row">
+      			<div class="col-auto">
+      			  <input type="email" class="form-control" id="contactEmail" name="contactEmail" placeholder="user@email.com">
+      			</div>
+      	</div>
+      </div>
+
+      <!-- Contact Notes-->
+      <div class="form-group">
+        <label for="inputAddress2">Notes</label>
+          <div class="form-row">
+      		<div class="col">
+      			<textarea class="form-control" name="contactNotes" rows="3" placeholder="Remarks"></textarea>
+      		</div>
+      	</div>
+      </div>
+
+      <input class="btn btn-primary" type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+    </main>
+
+    <aside class="aside-menu-hidden">
+      <!-- Aside menu content here -->
+    </aside>
+
+  </div>
+  <footer class="app-footer">
+    <% include partials/footer %>
+  </footer>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
+</body>
+
+</html>

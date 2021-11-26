@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+ <link rel="stylesheet" type="text/css" href="/stylesheets/custom.css">
+
+ <title>CRM - Import Client</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main mt-0 mx-3">
+              <h2>Import Client Tool</h2>
+              <hr>
+
+             <form action="/upload-clients" method="post">
+               <input type="text" class="form-control" id="csvData" name="csvData" value="<%= JSONClients %>" hidden>
+                <div class="tableWrap table-responsive text-nowrap" style=" height: 65vh; overflow-y:auto;">
+                     <table class="table table-bordered px-2 py-2 bg-white">
+                       <thead class="thead-dark">
+                         <tr>
+                           <th scope="col" class="align-middle">Agent Abbrev</th>
+                           <th scope="col" class="align-middle">Client Name</th>
+                           <th scope="col" class="align-middle">Client Phone</th>
+                           <th scope="col" class="align-middle">Client Fax</th>
+                           <th scope="col" class="align-middle">Client Address 1</th>
+                           <th scope="col" class="align-middle">Client Address 1 Type</th>
+                           <th scope="col" class="align-middle">Client Address 2</th>
+                           <th scope="col" class="align-middle">Client Address 2 Type</th>
+                           <th scope="col" class="align-middle">Client Address 3</th>
+                           <th scope="col" class="align-middle">Client Address 3 Type</th>
+                           <th scope="col" class="align-middle">Client Address 4</th>
+                           <th scope="col" class="align-middle">Client Address 4 Type</th>
+                           <th scope="col" class="align-middle">Client Email 1</th>
+                           <th scope="col" class="align-middle">Client Email 2</th>
+                           <th scope="col" class="align-middle">Client Prod OX</th>
+                           <th scope="col" class="align-middle">Client Prod PP</th>
+                           <th scope="col" class="align-middle">Client Prod TP</th>
+                           <th scope="col" class="align-middle">Client Notes</th>
+                           <th scope="col" class="align-middle">Client Status</th>
+                         </tr>
+                       </thead>
+                       <tbody>
+                         <%
+                           var list = '';
+                           for (i = 0; i < clients.length; i++) {
+                             list += '<tr>';
+                             list += '<th> <select class="form-control" id="agentAbbrev[' + i + ']" name="agentAbbrev[' + i + ']" required>';
+                             list += '<option value="" disabled selected>Select</option>';
+                             for (k = 0; k < agentList.length; k++) {
+                              // Select Agent based on default value
+                              if (defaultAgent == agentList[k].agentAbbrev) {
+                               list += '<option selected>' + agentList[k].agentAbbrev + '</option>';
+                              } else {
+                               list += '<option>' + agentList[k].agentAbbrev + '</option>';
+                              }
+                             }
+                             list += '</select> </th>';
+                             list += '<td style="vertical-align: middle">' + clients[i].clientName + '</td>';
+                             list += '<td style="vertical-align: middle">' + clients[i].clientPhone + '</td>';
+                             list += '<td style="vertical-align: middle">' + clients[i].clientFax + '</td>';
+                             list += '<td style="vertical-align: middle">' + clients[i].clientAddress1 + '</td>';
+                             list += '<td style="vertical-align: middle"><select class="form-control" id="clientAddress1Type[' + i + ']" name="clientAddress1Type[' + i + ']" required>';
+                             // Select default value
+                             if (defaultAddress1Type == 'Contact Address'){
+                               list += '<option selected>Contact Address</option>';
+                               list += '<option>Delivery Address</option>';
+                             } else if (defaultAddress1Type == 'Delivery Address'){
+                               list += '<option>Contact Address</option>';
+                               list += '<option selected>Delivery Address</option>';
+                             } else {
+                               list += '<option value="" disabled selected>Select</option>';
+                               list += '<option>Contact Address</option>';
+                               list += '<option>Delivery Address</option>';
+                             }
+                             list += '</select> </td>';
+                             list += '<td style="vertical-align: middle">' + clients[i].clientAddress2 + '</td>';
+                             list += '<td style="vertical-align: middle"><select class="form-control" id="clientAddress2Type[' + i + ']" name="clientAddress2Type[' + i + ']">';
+                             // Select default value
+                             if (defaultAddress2Type == 'Contact Address'){
+                               list += '<option selected>Contact Address</option>';
+                               list += '<option>Delivery Address</option>';
+                             } else if (defaultAddress2Type == 'Delivery Address'){
+                               list += '<option>Contact Address</option>';
+                               list += '<option selected>Delivery Address</option>';
+                             } else {
+                               list += '<option value="" disabled selected>Select</option>';
+                               list += '<option>Contact Address</option>';
+                               list += '<option>Delivery Address</option>';
+                             }
+                             list += '</select> </td>';
+                             list += '<td style="vertical-align: middle">' + clients[i].clientAddress3 + '</td>';
+                             list += '<td style="vertical-align: middle"><select class="form-control" id="clientAddress3Type[' + i + ']" name="clientAddress3Type[' + i + ']">';
+                             // Select default value
+                             if (defaultAddress3Type == 'Contact Address'){
+                               list += '<option selected>Contact Address</option>';
+                               list += '<option>Delivery Address</option>';
+                             } else if (defaultAddress3Type == 'Delivery Address'){
+                               list += '<option>Contact Address</option>';
+                               list += '<option selected>Delivery Address</option>';
+                             } else {
+                               list += '<option value="" disabled selected>Select</option>';
+                               list += '<option>Contact Address</option>';
+                               list += '<option>Delivery Address</option>';
+                             }
+                             list += '</select> </td>';
+                             list += '<td style="vertical-align: middle">' + clients[i].clientAddress4 + '</td>';
+                             list += '<td style="vertical-align: middle"><select class="form-control" id="clientAddress4Type[' + i + ']" name="clientAddress4Type[' + i + ']">';
+                             // Select default value
+                             if (defaultAddress4Type == 'Contact Address'){
+                               list += '<option selected>Contact Address</option>';
+                               list += '<option>Delivery Address</option>';
+                             } else if (defaultAddress4Type == 'Delivery Address'){
+                               list += '<option>Contact Address</option>';
+                               list += '<option selected>Delivery Address</option>';
+                             } else {
+                               list += '<option value="" disabled selected>Select</option>';
+                               list += '<option>Contact Address</option>';
+                               list += '<option>Delivery Address</option>';
+                             }
+                             list += '</select> </td>';
+                             list += '<td style="vertical-align: middle">' + clients[i].clientEmail1 + '</td>';
+                             list += '<td style="vertical-align: middle">' + clients[i].clientEmail2 + '</td>';
+                             //Select Default Values
+                             if (defaultProdOX == 'true') {
+                              list += '<td style="text-align:center; vertical-align: middle"><div class="custom-control custom-checkbox"><input class="form-check-input" type="checkbox" name="clientProdOX[' + i + ']" value="true" checked/></div></td>';
+                             } else {
+                              list += '<td style="text-align:center; vertical-align: middle"><div class="custom-control custom-checkbox"><input class="form-check-input" type="checkbox" name="clientProdOX[' + i + ']" value="true"/></div></td>';
+                             }
+                             //Select Default Values
+                             if (defaultProdPP == 'true') {
+                              list += '<td style="text-align:center; vertical-align: middle"><div class="custom-control custom-checkbox"><input class="form-check-input" type="checkbox" name="clientProdPP[' + i + ']" value="true" checked/></div></td>';
+                             } else {
+                              list += '<td style="text-align:center; vertical-align: middle"><div class="custom-control custom-checkbox"><input class="form-check-input" type="checkbox" name="clientProdPP[' + i + ']" value="true"/></div></td>';
+                             }
+                             //Select Default Values
+                             if (defaultProdTP == 'true') {
+                              list += '<td style="text-align:center; vertical-align: middle"><div class="custom-control custom-checkbox"><input class="form-check-input" type="checkbox" name="clientProdTP[' + i + ']" value="true" checked/></div></td>';
+                             } else {
+                              list += '<td style="text-align:center; vertical-align: middle"><div class="custom-control custom-checkbox"><input class="form-check-input" type="checkbox" name="clientProdTP[' + i + ']" value="true"/></div></td>';
+                             }
+                             list += '<td style="vertical-align: middle">' + clients[i].clientNotes + '</td>';
+                             list += '<td style="vertical-align: middle">Enabled</td>';
+                             list += '</tr>'
+                           }
+                         %>
+                         <%- list %>
+                       </tbody>
+                     </table>
+                   </div>
+             <br>
+               <input class="btn btn-primary" type="submit" value="Confirm Upload">
+             </form>
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

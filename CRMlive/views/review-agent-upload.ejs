@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+ <link rel="stylesheet" type="text/css" href="/stylesheets/custom.css">
+
+ <title>CRM - Import Agent</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main mt-2 mx-3">
+         <form action="/upload-agents" method="post">
+           <input type="text" class="form-control" id="csvData" name="csvData" value="<%= JSONAgents %>" hidden>
+            <input type="text" class="form-control" id="defaultPW" name="defaultPW" value="<%= password %>" hidden>
+           <table class="table table-bordered">
+             <thead class="thead-dark">
+               <tr>
+                 <th style="width: 5%" scope="col">Username:</th>
+                 <th style="width: 5%" scope="col">Change PW On Login:</th>
+                 <th style="width: 5%" scope="col">Usertype:</th>
+                 <th style="width: 5%" scope="col">Status:</th>                 
+                 <th style="width: 5%" scope="col">Agent Abbreviation:</th>
+                 <th style="width: 20%" scope="col">Agent First Name: </th>
+                 <th style="width: 20%" scope="col">Agent Last Name: </th>
+                 <th style="width: 20%" scope="col">Agent Position: </th>
+                 <th style="width: 20%" scope="col">Agent Phone: </th>
+               </tr>
+             </thead>
+             <tbody>
+               <%
+                 var list = '';
+                 for (i = 0; i < agents.length; i++) {
+                   list += '<tr>';
+                   list += '<td>' + agents[i].username + '</td>';  
+
+                   if (changePWOnLogin == 'true') {
+                    list += '<td style="text-align:center; vertical-align: middle"><div class="custom-control custom-checkbox"><input class="form-check-input" type="checkbox" name="ChangePWOnLogin[' + i + ']" value="true" checked/></div></td>';
+                   } else {
+                    list += '<td style="text-align:center; vertical-align: middle"><div class="custom-control custom-checkbox"><input class="form-check-input" type="checkbox" name="ChangePWOnLogin[' + i + ']" value="true"/></div></td>';
+                   }
+
+                   list += '<td style="vertical-align: middle"><select class="form-control" id="usertype[' + i + ']" name="usertype[' + i + ']" required>';
+                   // Select default value
+                   if (usertype == 'Administrator'){
+                     list += '<option selected>Administrator</option>';
+                     list += '<option>Agent</option>';
+                     list += '<option>Read-Only</option>';                     
+                   } else if (usertype == 'Agent'){
+                     list += '<option>Administrator</option>';
+                     list += '<option selected>Agent</option>';
+                     list += '<option>Read-Only</option>';                     
+                   } else if (usertype == 'Read-Only'){
+                     list += '<option>Administrator</option>';
+                     list += '<option>Agent</option>';
+                     list += '<option selected>Read-Only</option>';                     
+                   } else {
+                     list += '<option>Administrator</option>';
+                     list += '<option>Agent</option>';
+                     list += '<option>Read-Only</option>';                     
+                   }
+                   list += '</select> </td>';
+
+
+
+                   //status    
+                   list += '<td style="vertical-align: middle"><select class="form-control" id="active[' + i + ']" name="active[' + i + ']" required>';
+                   // Select default value
+                   if (active == 'Enabled'){
+                     list += '<option selected>Enabled</option>';
+                     list += '<option>Disabled</option>';
+                   } else {
+                     list += '<option>Enabled</option>';
+                     list += '<option selected>Disabled</option>';                 
+                   }
+                   list += '</select> </td>';
+
+
+
+                   list += '<td>' + agents[i].agentAbbrev + '</td>';
+                   list += '<td>' + agents[i].agentFirstName + '</td>';
+                   list += '<td>' + agents[i].agentLastName + '</td>';
+                   list += '<td>' + agents[i].agentPosition + '</td>';
+                   list += '<td>' + agents[i].agentPhone + '</td>';
+                   list += '</tr>'
+                 }
+               %>
+               <%- list %>
+             </tbody>
+           </table>
+           <input class="btn btn-primary" type="submit" value="Confirm Upload">
+         </form>
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

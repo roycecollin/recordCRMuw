@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+ <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+ <title>CRM - View Event</title>
+
+ <script>
+
+ window.onload = function() {
+   var isEditing = false;
+
+   document.getElementById('editEventDate').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventDate').disabled = false;
+       document.getElementById('updateEventDate').type = 'button';
+       document.getElementById('editEventDate').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventDate').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventDate').disabled = true;
+     document.getElementById('updateEventDate').type = 'hidden';
+     document.getElementById('editEventDate').type = 'button';
+   }
+
+   document.getElementById('editEventAgent').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventAgent').disabled = false;
+       document.getElementById('updateEventAgent').type = 'button';
+       document.getElementById('editEventAgent').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventAgent').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventAgent').disabled = true;
+     document.getElementById('updateEventAgent').type = 'hidden';
+     document.getElementById('editEventAgent').type = 'button';
+   }
+
+   document.getElementById('editEventTimeIn').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventTimeIn').disabled = false;
+       document.getElementById('updateEventTimeIn').type = 'button';
+       document.getElementById('editEventTimeIn').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventTimeIn').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventTimeIn').disabled = true;
+     document.getElementById('updateEventTimeIn').type = 'hidden';
+     document.getElementById('editEventTimeIn').type = 'button';
+   }
+
+   document.getElementById('editEventTimeOut').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventTimeOut').disabled = false;
+       document.getElementById('updateEventTimeOut').type = 'button';
+       document.getElementById('editEventTimeOut').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventTimeOut').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventTimeOut').disabled = true;
+     document.getElementById('updateEventTimeOut').type = 'hidden';
+     document.getElementById('editEventTimeOut').type = 'button';
+   }
+
+   document.getElementById('editEventClient').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventClient').disabled = false;
+       document.getElementById('updateEventClient').type = 'button';
+       document.getElementById('editEventClient').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventClient').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventClient').disabled = true;
+     document.getElementById('updateEventClient').type = 'hidden';
+     document.getElementById('editEventClient').type = 'button';
+   }
+
+   document.getElementById('editEventType').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventType').disabled = false;
+       document.getElementById('updateEventType').type = 'button';
+       document.getElementById('editEventType').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventType').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventType').disabled = true;
+     document.getElementById('updateEventType').type = 'hidden';
+     document.getElementById('editEventType').type = 'button';
+   }
+
+   document.getElementById('editEventContactID1').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventContactID1').disabled = false;
+       document.getElementById('updateEventContactID1').type = 'button';
+       document.getElementById('editEventContactID1').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventContactID1').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventContactID1').disabled = true;
+     document.getElementById('updateEventContactID1').type = 'hidden';
+     document.getElementById('editEventContactID1').type = 'button';
+   }
+
+   document.getElementById('editEventContactID2').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventContactID2').disabled = false;
+       document.getElementById('updateEventContactID2').type = 'button';
+       document.getElementById('editEventContactID2').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventContactID2').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventContactID2').disabled = true;
+     document.getElementById('updateEventContactID2').type = 'hidden';
+     document.getElementById('editEventContactID2').type = 'button';
+   }
+
+   document.getElementById('editEventBranch').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventBranch').readOnly = false;
+       document.getElementById('updateEventBranch').type = 'button';
+       document.getElementById('editEventBranch').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventBranch').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventBranch').readOnly = true;
+     document.getElementById('updateEventBranch').type = 'hidden';
+     document.getElementById('editEventBranch').type = 'button';
+   }
+
+   document.getElementById('editEventRemarks').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventRemarks').readOnly = false;
+       document.getElementById('updateEventRemarks').type = 'button';
+       document.getElementById('editEventRemarks').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventRemarks').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventRemarks').readOnly = true;
+     document.getElementById('updateEventRemarks').type = 'hidden';
+     document.getElementById('editEventRemarks').type = 'button';
+   }
+
+
+
+
+   document.getElementById('editEventDateMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventDateMobile').disabled = false;
+       document.getElementById('updateEventDateMobile').type = 'button';
+       document.getElementById('editEventDateMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventDateMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventDateMobile').disabled = true;
+     document.getElementById('updateEventDateMobile').type = 'hidden';
+     document.getElementById('editEventDateMobile').type = 'button';
+   }
+
+   document.getElementById('editEventAgentMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventAgentMobile').disabled = false;
+       document.getElementById('updateEventAgentMobile').type = 'button';
+       document.getElementById('editEventAgentMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventAgentMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventAgentMobile').disabled = true;
+     document.getElementById('updateEventAgentMobile').type = 'hidden';
+     document.getElementById('editEventAgentMobile').type = 'button';
+   }
+
+   document.getElementById('editEventTimeInMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventTimeInMobile').disabled = false;
+       document.getElementById('updateEventTimeInMobile').type = 'button';
+       document.getElementById('editEventTimeInMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventTimeInMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventTimeInMobile').disabled = true;
+     document.getElementById('updateEventTimeInMobile').type = 'hidden';
+     document.getElementById('editEventTimeInMobile').type = 'button';
+   }
+
+   document.getElementById('editEventTimeOutMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventTimeOutMobile').disabled = false;
+       document.getElementById('updateEventTimeOutMobile').type = 'button';
+       document.getElementById('editEventTimeOutMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventTimeOutMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventTimeOutMobile').disabled = true;
+     document.getElementById('updateEventTimeOutMobile').type = 'hidden';
+     document.getElementById('editEventTimeOutMobile').type = 'button';
+   }
+
+   document.getElementById('editEventClientMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventClientMobile').disabled = false;
+       document.getElementById('updateEventClientMobile').type = 'button';
+       document.getElementById('editEventClientMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventClientMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventClientMobile').disabled = true;
+     document.getElementById('updateEventClientMobile').type = 'hidden';
+     document.getElementById('editEventClientMobile').type = 'button';
+   }
+
+   document.getElementById('editEventTypeMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventTypeMobile').disabled = false;
+       document.getElementById('updateEventTypeMobile').type = 'button';
+       document.getElementById('editEventTypeMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventTypeMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventTypeMobile').disabled = true;
+     document.getElementById('updateEventTypeMobile').type = 'hidden';
+     document.getElementById('editEventTypeMobile').type = 'button';
+   }
+
+   document.getElementById('editEventContactID1Mobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventContactID1Mobile').disabled = false;
+       document.getElementById('updateEventContactID1Mobile').type = 'button';
+       document.getElementById('editEventContactID1Mobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventContactID1Mobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventContactID1Mobile').disabled = true;
+     document.getElementById('updateEventContactID1Mobile').type = 'hidden';
+     document.getElementById('editEventContactID1Mobile').type = 'button';
+   }
+
+   document.getElementById('editEventContactID2Mobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventContactID2Mobile').disabled = false;
+       document.getElementById('updateEventContactID2Mobile').type = 'button';
+       document.getElementById('editEventContactID2Mobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventContactID2Mobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventContactID2Mobile').disabled = true;
+     document.getElementById('updateEventContactID2Mobile').type = 'hidden';
+     document.getElementById('editEventContactID2Mobile').type = 'button';
+   }
+
+   document.getElementById('editEventBranchMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventBranchMobile').readOnly = false;
+       document.getElementById('updateEventBranchMobile').type = 'button';
+       document.getElementById('editEventBranchMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventBranchMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventBranchMobile').readOnly = true;
+     document.getElementById('updateEventBranchMobile').type = 'hidden';
+     document.getElementById('editEventBranchMobile').type = 'button';
+   }
+
+   document.getElementById('editEventRemarksMobile').onclick = function(){
+     if (isEditing == false) {
+       isEditing = true;
+       document.getElementById('eventRemarksMobile').readOnly = false;
+       document.getElementById('updateEventRemarksMobile').type = 'button';
+       document.getElementById('editEventRemarksMobile').type = 'hidden';
+     } else {window.alert("Only 1 field can be edited at a time");};
+   }
+   document.getElementById('updateEventRemarksMobile').onclick = function(){
+     isEditing = false;
+     document.getElementById('eventRemarksMobile').readOnly = true;
+     document.getElementById('updateEventRemarksMobile').type = 'hidden';
+     document.getElementById('editEventRemarksMobile').type = 'button';
+   }
+ }
+ </script>
+ </head>
+
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main mt-0 mx-3">
+              <h2>View/Edit Event</h2>
+              <hr>
+                <h4> Event Information</h4>
+          <form id="formEditEvent" name="viewEvent" method="post" action="/viewEvent" onsubmit="enableFields()">
+          <input type="name" class="form-control" id="eventID" name="eventID" value="<%= eventID %>" hidden>
+          <div class="table d-none d-md-block">
+            <table class="table table-bordered px-2 py-2 bg-white">
+            <tbody>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Date</th>
+                <td>
+                  <%
+                    var str = result.events[0].eventTimeIn._i.toString();
+                    var eventDate = str.substr(0,10);
+                  %>
+                  <input type="date" class="form-control" id="eventDate" name="eventDate" value = "<%= eventDate %>" disabled required>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventDate" value="edit"></input>
+                  <input type="hidden" id="updateEventDate" value="Save"></input>
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Agent:</th>
+                <td>
+                  <select class="form-control" id="eventAgent" name="eventAgent" disabled required>
+                    <%
+                        var list = '';
+                        for (i = 0; i < result.agents.length; i++) {
+                          if (result.agents[i].agentAbbrev == result.events[0].agentAbbrev){
+                            list += '<option selected>' + result.agents[i].agentAbbrev + '</option>';
+                          } else {
+                            list += '<option>' + result.agents[i].agentAbbrev + '</option>';
+                          }
+                        }
+                    %>
+                      <%- list %>
+                  </select>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventAgent" value="edit"></input>
+                  <input type="hidden" id="updateEventAgent" value="Save"></input>
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Time In</th>
+                <td>
+                  <%
+                    var str = result.events[0].eventTimeIn._d.toString();
+                    var eventTimeIn = str.substr(16, 5);
+                  %>
+                  <input type="time" class="form-control" id="eventTimeIn" name="eventTimeIn" value = "<%- eventTimeIn %>" disabled required>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventTimeIn" value="edit"></input>
+                  <input type="hidden" id="updateEventTimeIn" value="Save"></input>
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Time Out</th>
+                <td>
+                  <%
+                    var str = result.events[0].eventTimeOut._d.toString();
+                    var eventTimeOut = str.substr(16, 5);
+                  %>
+                  <input type="time" class="form-control" id="eventTimeOut" name="eventTimeOut" value = "<%- eventTimeOut %>" disabled required>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventTimeOut" value="edit"></input>
+                  <input type="hidden" id="updateEventTimeOut" value="Save"></input>
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Client:</th>
+                <td>
+                  <select class="form-control" id="eventClient" name="eventClient" onChange="changeAgent(this.value);" disabled>
+                    <%
+                        var list = '';
+                        for (i = 0; i < result.clients.length; i++) {
+                          if (result.clients[i].clientName == result.events[0].clientName){
+                            list += '<option selected>' + result.clients[i].clientName + '</option>';
+                          } else {
+                            list += '<option>' + result.clients[i].clientName + '</option>';
+                          }
+                        }
+                    %>
+                      <%- list %>
+                  </select>
+
+                  <span id='variableJSON' hidden>
+                    <%= JSON.stringify(result.contacts); %>
+                  </span>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventClient" value="edit"></input>
+                  <input type="hidden" id="updateEventClient" value="Save"></input>
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Visit Type:</th>
+                <td>
+                  <select class="form-control" id="eventType" name="eventType" disabled required>
+                    <%
+                      var list = '';
+                      if(result.events[0].eventType == "Collection"){
+                        list += '<option selected>Collection</option>';
+                        list += '<option>Courtesy Visit</option>';
+                        list += '<option>Technical Service</option>';
+                        list += '<option>Delivery</option>';
+                      } else if (result.events[0].eventType == "Courtesy Visit") {
+                        list += '<option>Collection</option>';
+                        list += '<option selected>Courtesy Visit</option>';
+                        list += '<option>Technical Service</option>';
+                        list += '<option>Delivery</option>';
+                      } else if (result.events[0].eventType == "Technical Service"){
+                        list += '<option>Collection</option>';
+                        list += '<option>Courtesy Visit</option>';
+                        list += '<option selected>Technical Service</option>';
+                        list += '<option>Delivery</option>';
+                      } else if (result.events[0].eventType == "Delivery"){
+                        list += '<option>Collection</option>';
+                        list += '<option>Courtesy Visit</option>';
+                        list += '<option>Technical Service</option>';
+                        list += '<option selected>Delivery</option>';
+                    }
+                    %>
+                      <%- list %>
+                  </select>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventType" value="edit"></input>
+                  <input type="hidden" id="updateEventType" value="Save"></input>
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Contact 1 Visited</th>
+                <td>
+                  <select class="form-control" id="eventContactID1" name="eventContactID1" disabled>
+                    <%
+                      var list = '<option>N/A</option>';
+                      for (i = 0; i < result.contacts.length; i++) {
+                        var contactFullName = result.contacts[i].contactFirstName + " " + result.contacts[i].contactLastName;
+                        if (contactFullName == result.events[0].contact1 && result.contacts[i].contactClientID == result.events[0].clientName) {
+                          list += '<option selected>' + contactFullName + '</option>';
+                        } else if (result.contacts[i].contactClientID == result.events[0].clientName) {
+                          list += '<option>' + contactFullName + '</option>';
+                        }
+                      }
+                    %>
+                    <%- list %>
+                  </select>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventContactID1" value="edit"></input>
+                  <input type="hidden" id="updateEventContactID1" value="Save"></input>
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Contact 2 Visited</th>
+                <td>
+                  <select class="form-control" id="eventContactID2" name="eventContactID2" disabled>
+                    <%
+                      var list = '<option>N/A</option>';
+                      for (i = 0; i < result.contacts.length; i++) {
+                        var contactFullName = result.contacts[i].contactFirstName + " " + result.contacts[i].contactLastName;
+                        if (contactFullName == result.events[0].contact2 && result.contacts[i].contactClientID == result.events[0].clientName) {
+                          list += '<option selected>' + contactFullName + '</option>';
+                        } else if (result.contacts[i].contactClientID == result.events[0].clientName) {
+                          list += '<option>' + contactFullName + '</option>';
+                        }
+                      }
+                    %>
+                    <%- list %>
+                  </select>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventContactID2" value="edit"></input>
+                  <input type="hidden" id="updateEventContactID2" value="Save"></input>
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Branch Location:</th>
+                <td>
+                  <input type="text" class="form-control" id="eventBranch" name="eventBranch" value = "<%= result.events[0].eventBranch %>" readonly>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventBranch" value="edit"></input>
+                  <input type="hidden" id="updateEventBranch" value="Save"></input>
+                </td>
+              </tr>
+              <tr>
+                <th style="width: 15%" scope="col" class="align-middle">Remarks:</th>
+                <td>
+                  <input type="text" class="form-control" id="eventRemarks" name="eventRemarks" value = "<%= result.events[0].eventRemarks %>" required readonly>
+                </td>
+                <td style="width: 5%; text-align:center" class="align-middle">
+                  <input type="button" id="editEventRemarks" value="edit"></input>
+                  <input type="hidden" id="updateEventRemarks" value="Save"></input>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+      </form>
+
+          <!-- Mobile View of Data -->
+                    <div class="table d-block d-sm-none">
+                      <form id="formEditEvent" name="viewEvent" method="post" action="/viewEvent" onsubmit="enableFields()">
+                      <input type="name" class="form-control" id="eventID" name="eventID" value="<%= eventID %>" hidden>
+                      <table class="table bg-white">
+                        <tbody>
+          <!-- Mobile View Event Date -->
+                          <tr>
+                            <th style="text-align:left">Date</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventDateMobile" value="edit"></input>
+                              <input type="hidden" id="updateEventDateMobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 scope="row">
+                              <%
+                                var str = result.events[0].eventTimeIn._i.toString();
+                                var eventDate = str.substr(0,10);
+                              %>
+                              <input type="date" class="form-control" id="eventDateMobile" name="eventDate" value = "<%= eventDate %>" disabled required>
+                            </td>
+                          </tr>
+                    <!-- Mobile View Event Agent -->
+                          <tr>
+                            <th style="text-align:left">Agent</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventAgentMobile" value="edit"></input>
+                              <input type="hidden" id="updateEventAgentMobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 scope="row">
+                              <select class="form-control" id="eventAgentMobile" name="eventAgent" disabled required>
+                                <%
+                                    var list = '';
+                                    for (i = 0; i < result.agents.length; i++) {
+                                      if (result.agents[i].agentAbbrev == result.events[0].agentAbbrev){
+                                        list += '<option selected>' + result.agents[i].agentAbbrev + '</option>';
+                                      } else {
+                                        list += '<option>' + result.agents[i].agentAbbrev + '</option>';
+                                      }
+                                    }
+                                %>
+                                  <%- list %>
+                              </select>
+                            </td>
+                          </tr>
+              <!-- Mobile View Event Time In -->
+                          <tr>
+                            <th class="px-3" style="text-align:left">Time In</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventTimeInMobile" value="edit"></input>
+                              <input type="hidden" id="updateEventTimeInMobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 style="width: 100%" class="align-middle">
+                              <%
+                                var str = result.events[0].eventTimeIn._d.toString();
+                                var eventTimeIn = str.substr(16, 5);
+                              %>
+                              <input type="time" class="form-control" id="eventTimeInMobile" name="eventTimeIn" value = "<%- eventTimeIn %>" disabled required>
+                          </tr>
+              <!-- Mobile View Event Time Out -->
+                          <tr>
+                            <th style="text-align:left">Time Out</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventTimeOutMobile" value="edit"></input>
+                              <input type="hidden" id="updateEventTimeOutMobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 scope="row">
+                              <%
+                                var str = result.events[0].eventTimeOut._d.toString();
+                                var eventTimeOut = str.substr(16, 5);
+                              %>
+                              <input type="time" class="form-control" id="eventTimeOutMobile" name="eventTimeOut" value = "<%- eventTimeOut %>" disabled required>
+                            </td>
+                          </tr>
+                <!-- Mobile View Event Client -->
+                          <tr>
+                            <th style="text-align:left">Client</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventClientMobile" value="edit"></input>
+                              <input type="hidden" id="updateEventClientMobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 scope="row">
+                              <select class="form-control" id="eventClientMobile" name="eventClient" onChange="changeAgent(this.value);" disabled>
+                                <%
+                                    var list = '';
+                                    for (i = 0; i < result.clients.length; i++) {
+                                      if (result.clients[i].clientName == result.events[0].clientName){
+                                        list += '<option selected>' + result.clients[i].clientName + '</option>';
+                                      } else {
+                                        list += '<option>' + result.clients[i].clientName + '</option>';
+                                      }
+                                    }
+                                %>
+                                  <%- list %>
+                              </select>
+
+                              <span id='variableJSON' hidden>
+                                <%= JSON.stringify(result.contacts); %>
+                              </span>
+                            </td>
+                          </tr>
+                <!-- Mobile View Event Visit Type -->
+                          <tr>
+                            <th style="text-align:left">Visit Type</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventTypeMobile" value="edit"></input>
+                              <input type="hidden" id="updateEventTypeMobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 scope="row">
+                              <select class="form-control" id="eventTypeMobile" name="eventType" disabled required>
+                                <%
+                                  var list = '';
+                                  if(result.events[0].eventType == "Collection"){
+                                    list += '<option selected>Collection</option>';
+                                    list += '<option>Courtesy Visit</option>';
+                                    list += '<option>Technical Service</option>';
+                                    list += '<option>Delivery</option>';
+                                  } else if (result.events[0].eventType == "Courtesy Visit") {
+                                    list += '<option>Collection</option>';
+                                    list += '<option selected>Courtesy Visit</option>';
+                                    list += '<option>Technical Service</option>';
+                                    list += '<option>Delivery</option>';
+                                  } else if (result.events[0].eventType == "Technical Service"){
+                                    list += '<option>Collection</option>';
+                                    list += '<option>Courtesy Visit</option>';
+                                    list += '<option selected>Technical Service</option>';
+                                    list += '<option>Delivery</option>';
+                                  } else if (result.events[0].eventType == "Delivery"){
+                                    list += '<option>Collection</option>';
+                                    list += '<option>Courtesy Visit</option>';
+                                    list += '<option>Technical Service</option>';
+                                    list += '<option selected>Delivery</option>';
+                                }
+                                %>
+                                  <%- list %>
+                              </select>
+                            </td>
+                          </tr>
+                <!-- Mobile View Visit Contact 1-->
+                          <tr>
+                            <th style="text-align:left">Contact 1</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventContactID1Mobile" value="edit"></input>
+                              <input type="hidden" id="updateEventContactID1Mobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 scope="row">
+                              <select class="form-control" id="eventContactID1Mobile" name="eventContactID1" disabled>
+                                <%
+                                  var list = '<option>N/A</option>';
+                                  for (i = 0; i < result.contacts.length; i++) {
+                                    var contactFullName = result.contacts[i].contactFirstName + " " + result.contacts[i].contactLastName;
+                                    if (contactFullName == result.events[0].contact1 && result.contacts[i].contactClientID == result.events[0].clientName) {
+                                      list += '<option selected>' + contactFullName + '</option>';
+                                    } else if (result.contacts[i].contactClientID == result.events[0].clientName) {
+                                      list += '<option>' + contactFullName + '</option>';
+                                    }
+                                  }
+                                %>
+                                <%- list %>
+                              </select>
+                          </tr>
+
+                <!-- Mobile View Visit Contact 2-->
+                          <tr>
+                            <th style="text-align:left">Contact 2</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventContactID2Mobile" value="edit"></input>
+                              <input type="hidden" id="updateEventContactID2Mobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 scope="row">
+                              <select class="form-control" id="eventContactID2Mobile" name="eventContactID2" disabled>
+                                <%
+                                  var list = '<option>N/A</option>';
+                                  for (i = 0; i < result.contacts.length; i++) {
+                                    var contactFullName = result.contacts[i].contactFirstName + " " + result.contacts[i].contactLastName;
+                                    if (contactFullName == result.events[0].contact2 && result.contacts[i].contactClientID == result.events[0].clientName) {
+                                      list += '<option selected>' + contactFullName + '</option>';
+                                    } else if (result.contacts[i].contactClientID == result.events[0].clientName) {
+                                      list += '<option>' + contactFullName + '</option>';
+                                    }
+                                  }
+                                %>
+                                <%- list %>
+                              </select>
+                          </tr>
+                <!-- Mobile View Visit Branch Location-->
+                          <tr>
+                            <th style="text-align:left">Branch</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventBranchMobile" value="edit"></input>
+                              <input type="hidden" id="updateEventBranchMobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 scope="row">
+                              <input type="text" class="form-control" id="eventBranchMobile" name="eventBranch" value = "<%= result.events[0].eventBranch %>" readonly>
+                          </tr>
+                <!-- Mobile View Visit Remarks-->
+                          <tr>
+                            <th style="text-align:left">Remarks</th>
+                            <th style="width: 16.66%" class="align-middle">
+                              <input type="button" id="editEventRemarksMobile" value="edit"></input>
+                              <input type="hidden" id="updateEventRemarksMobile" value="Save"></input>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td colspan=2 scope="row">
+                              <textarea class="form-control" id="eventRemarksMobile" name="eventRemarks" required readonly><%= result.events[0].eventRemarks %></textarea>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-12 col-md-auto">
+                          <button type="submit" class="btn-block btn-primary btn-lg" id="submit" name="submit">Submit</button>
+                          <input style="visibility: hidden" id="isEditing" name ="isEditing" value="false">
+                        </div>
+                      </div>
+                    </div>
+
+          <!--All drop down fields need to be set at enabled before they will be sent as part of the payload to mongo -->
+          <script>
+            function changeAgent(value){
+              var contacts = JSON.parse($('#variableJSON').text());
+              var contactOptions = "";
+              console.log(contactOptions);
+              contactOptions += "<option>N/A</option>";
+              for (j = 0; j < contacts.length; j++) {
+                if(contacts[j].contactClientID === value) {
+                  contactOptions += "<option>" + contacts[j].contactFirstName + " " + contacts[j].contactLastName + "</option>";
+                }
+              }
+              console.log(contactOptions);
+              window.alert("Reselect both contacts");
+              document.getElementById("eventContactID1").innerHTML = contactOptions;
+              document.getElementById("eventContactID2").innerHTML = contactOptions;
+              document.getElementById("eventContactID1Mobile").value = contactOptions;
+              document.getElementById("eventContactID2Mobile").value = contactOptions;
+            }
+          </script>
+          <script>
+            function enableFields() {
+              // for desktop
+              document.getElementById('eventDate').disabled = false;
+              document.getElementById('eventAgent').disabled = false;
+              document.getElementById('eventTimeIn').disabled = false;
+              document.getElementById('eventTimeOut').disabled = false;
+              document.getElementById('eventClient').disabled = false;
+              document.getElementById('eventType').disabled = false;
+              document.getElementById('eventContactID1').disabled = false;
+              document.getElementById('eventContactID2').disabled = false;
+
+              // for mobile
+              document.getElementById('eventDateMobile').disabled = false;
+              document.getElementById('eventAgentMobile').disabled = false;
+              document.getElementById('eventTimeInMobile').disabled = false;
+              document.getElementById('eventTimeOutMobile').disabled = false;
+              document.getElementById('eventClientMobile').disabled = false;
+              document.getElementById('eventTypeMobile').disabled = false;
+              document.getElementById('eventContactID1Mobile').disabled = false;
+              document.getElementById('eventContactID2Mobile').disabled = false;
+            }
+          </script>
+          </form>
+
+<hr>
+
+    </div>
+  </div>
+
+    </main>
+
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

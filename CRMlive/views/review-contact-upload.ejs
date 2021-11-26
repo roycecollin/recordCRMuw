@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/custom.css">
+
+ <title>CRM - Import Contact</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main mt-0 mx-3">
+              <h2>Import Contact Tool</h2>
+              <hr>
+         <form action="/upload-contacts" method="post">
+           <input type="text" class="form-control" id="csvData" name="csvData" value="<%= JSONContacts %>" hidden>
+          <div class="tableWrap table-responsive text-nowrap" style=" height: 65vh; overflow-y:auto;">
+           <table class="table table-bordered px-2 py-2 bg-white">
+             <thead class="thead-dark">
+               <tr>
+                 <th style="width: 15%" scope="col" class="align-middle">Client Name</th>
+                 <th style="width: 10%" scope="col" class="align-middle">Contact First Name</th>
+                 <th style="width: 10%" scope="col" class="align-middle">Contact Last Name</th>
+                 <th style="width: 10%" scope="col" class="align-middle">Contact Position</th>
+                 <th style="width: 10%" scope="col" class="align-middle">Contact Phone</th>
+                 <th style="width: 10%" scope="col" class="align-middle">Contact Mobile</th>
+                 <th style="width: 15%" scope="col" class="align-middle">Contact Email</th>
+                 <th style="width: 20%" scope="col" class="align-middle">Contact Notes</th>
+                 <th style="width: 20%" scope="col" class="align-middle">Active</th>
+               </tr>
+             </thead>
+             <tbody>
+               <%
+                 var contactData = JSON.parse(JSONContacts);
+                 var list = '';
+                 for (i = 0; i < contactData.length; i++) {
+                   list += '<tr>';
+                   list += '<td> <select class="form-control" id="contactClientID[' + i + ']" name="contactClientID[' + i + ']" required>';
+                   for (k = 0; k < clientList.length; k++) {
+                    console.log (clientList[k].clientName);
+                    console.log(defaultClient);
+                    // check if clientName is default selected from prior pagge
+                    if (defaultClient == clientList[k].clientName){
+                      list += '<option selected>' + clientList[k].clientName + '</option>';
+                    } else {
+                      list += '<option>' + clientList[k].clientName + '</option>';
+                    }
+                   }
+                   list += '</select> </td>';
+                   list += '<td>' + contactData[i].contactFirstName + '</td>';
+                   list += '<td>' + contactData[i].contactLastName + '</td>';
+                   list += '<td>' + contactData[i].contactPosition + '</td>';
+                   list += '<td>' + contactData[i].contactPhone + '</td>';
+                   list += '<td>' + contactData[i].contactMobile + '</td>';
+                   list += '<td>' + contactData[i].contactEmail + '</td>';
+                   list += '<td>' + contactData[i].contactNotes + '</td>';
+                   list += '<td>Enabled</td>';
+                   list += '</tr>'
+                 }
+               %>
+               <%- list %>
+             </tbody>
+           </table>
+         </div>
+         <br>
+           <input class="btn btn-primary" type="submit" value="Confirm Upload">
+         </form>
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

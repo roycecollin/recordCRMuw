@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel='stylesheet' href='https://unpkg.com/@coreui/coreui@2.1.16/dist/css/coreui.min.css' />
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+    <script> 
+
+    window.onload = function() {
+      var isEditing = false;
+
+      document.getElementById('editContactClientID').onclick = function(){
+        if (isEditing == false) {
+          isEditing = true;
+        document.getElementById('contactClientID').disabled = false;
+        document.getElementById('updateContactClientID').type = 'button';
+        document.getElementById('editContactClientID').type = 'hidden';
+      } else {window.alert("Only 1 field can be edited at a time");};
+      }
+      document.getElementById('updateContactClientID').onclick = function(){
+        isEditing = false;
+        document.getElementById('contactClientID').disabled = true;
+        document.getElementById('updateContactClientID').type = 'hidden';
+        document.getElementById('editContactClientID').type = 'button';
+      }
+
+      document.getElementById('editContactPosition').onclick = function(){
+        if (isEditing == false) {
+          isEditing = true;
+        document.getElementById('contactPosition').readOnly = false;
+        document.getElementById('updateContactPosition').type = 'button';
+        document.getElementById('editContactPosition').type = 'hidden';
+      } else {window.alert("Only 1 field can be edited at a time");};
+      }
+      document.getElementById('updateContactPosition').onclick = function(){
+        isEditing = false;
+        document.getElementById('contactPosition').readOnly = true;
+        document.getElementById('updateContactPosition').type = 'hidden';
+        document.getElementById('editContactPosition').type = 'button';
+      }
+
+      document.getElementById('editContactPhone').onclick = function(){
+        if (isEditing == false) {
+          isEditing = true;
+        document.getElementById('contactPhone').readOnly = false;
+        document.getElementById('updateContactPhone').type = 'button';
+        document.getElementById('editContactPhone').type = 'hidden';
+      } else {window.alert("Only 1 field can be edited at a time");};
+      }
+      document.getElementById('updateContactPhone').onclick = function(){
+        isEditing = false;
+        document.getElementById('contactPhone').readOnly = true;
+        document.getElementById('updateContactPhone').type = 'hidden';
+        document.getElementById('editContactPhone').type = 'button';
+      }
+
+      document.getElementById('editContactMobile').onclick = function(){
+        if (isEditing == false) {
+          isEditing = true;
+        document.getElementById('contactMobile').readOnly = false;
+        document.getElementById('updateContactMobile').type = 'button';
+        document.getElementById('editContactMobile').type = 'hidden';
+      } else {window.alert("Only 1 field can be edited at a time");};
+      }
+      document.getElementById('updateContactMobile').onclick = function(){
+        isEditing = false;
+        document.getElementById('contactMobile').readOnly = true;
+        document.getElementById('updateContactMobile').type = 'hidden';
+        document.getElementById('editContactMobile').type = 'button';
+      }
+ 
+      document.getElementById('editContactEmail').onclick = function(){
+        if (isEditing == false) {
+          isEditing = true;
+        document.getElementById('contactEmail').readOnly = false;
+        document.getElementById('updateContactEmail').type = 'button';
+        document.getElementById('editContactEmail').type = 'hidden';
+      } else {window.alert("Only 1 field can be edited at a time");};
+      }
+      document.getElementById('updateContactEmail').onclick = function(){
+        isEditing = false;
+        document.getElementById('contactEmail').readOnly = true;
+        document.getElementById('updateContactEmail').type = 'hidden';
+        document.getElementById('editContactEmail').type = 'button';
+      }
+
+      document.getElementById('editContactNotes').onclick = function(){
+        if (isEditing == false) {
+          isEditing = true;
+        document.getElementById('contactNotes').readOnly = false;
+        document.getElementById('updateContactNotes').type = 'button';
+        document.getElementById('editContactNotes').type = 'hidden';
+      } else {window.alert("Only 1 field can be edited at a time");};
+      }
+      document.getElementById('updateContactNotes').onclick = function(){
+        isEditing = false;
+        document.getElementById('contactNotes').readOnly = true;
+        document.getElementById('updateContactNotes').type = 'hidden';
+        document.getElementById('editContactNotes').type = 'button';
+      }
+
+      document.getElementById('editContactStatus').onclick = function(){
+        if (isEditing == false) {
+          isEditing = true;
+        document.getElementById('contactStatus').disabled = false;
+        document.getElementById('updateContactStatus').type = 'button';
+        document.getElementById('editContactStatus').type = 'hidden';
+      } else {window.alert("Only 1 field can be edited at a time");};
+      }
+      document.getElementById('updateContactStatus').onclick = function(){
+        isEditing = false;
+        document.getElementById('contactStatus').disabled = true;
+        document.getElementById('updateContactStatus').type = 'hidden';
+        document.getElementById('editContactStatus').type = 'button';
+      }
+    }
+    </script>
+  </head>
+
+<body class="app sidebar-show aside-menu-show">
+
+  <header class="app-header navbar">
+    <% include partials/header %>
+  </header>
+
+  <div class="app-body">
+
+    <div class="sidebar">
+      <% include partials/sidebar %>
+    </div>
+
+    <main class="main mt-2 mx-3">
+      <form id="formEditContact" name="viewContact" method="post" action="/viewContact" onsubmit="enableFields()">
+      <input type="name" class="form-control" id="contactID" name="contactID" value="<%= contactID %>" hidden>
+      <div class="card w-auto">
+        <h3 class="card-header">View/Edit Contact</h3>
+        <div class="card-body">
+      <h4> Contact Information</h4>
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th style="width: 5%" scope="col">Name:</th>
+            <th style="width: 20%" scope="col"> <%= result.contact[0].contactFirstName %> <%= result.contact[0].contactLastName %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Client:</th>
+            <td colspan="3"> 
+              <select class="form-control" id="contactClientID" name="contactClientID" disabled required>
+                <%
+                    var list = '';
+                    for (i = 0; i < result.clients.length; i++) {
+                      if (result.clients[i].clientName == result.contact[0].contactClientID){
+                        list += '<option selected>' + result.clients[i].clientName + '</option>';
+                      } else {
+                        list += '<option>' + result.clients[i].clientName + '</option>';
+                      } 
+                    }
+                %>
+                  <%- list %>
+              </select>
+              <input type="button" id="editContactClientID" value="edit"></input>
+              <input type="hidden" id="updateContactClientID" value="Save"></input>
+              
+          </td>
+          </tr>
+          <tr>
+            <th scope="row">Position:</th>
+            <td colspan="3"> 
+              <input type="text" class="form-control" id="contactPosition" name="contactPosition" value = "<%= result.contact[0].contactPosition %>" required readonly>
+              <input type="button" id="editContactPosition" value="edit"></input>
+              <input type="hidden" id="updateContactPosition" value="Save"></input>
+              
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Contact Phone Number:</th>
+            <td colspan="3"> 
+              <input type="text" class="form-control" id="contactPhone" name="contactPhone" value = "<%= result.contact[0].contactPhone %>" readonly>
+              <input type="button" id="editContactPhone" value="edit"></input>
+              <input type="hidden" id="updateContactPhone" value="Save"></input>
+              
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Contact Mobile Number:</th>
+            <td colspan="3"> 
+              <input type="text" class="form-control" id="contactMobile" name="contactMobile" value = "<%= result.contact[0].contactMobile %>" readonly>
+              <input type="button" id="editContactMobile" value="edit"></input>
+              <input type="hidden" id="updateContactMobile" value="Save"></input>
+              
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Email Address:</th>
+            <td colspan="3"> 
+              <input type="email" class="form-control" id="contactEmail" name="contactEmail" value = "<%= result.contact[0].contactEmail %>" readonly>
+              <input type="button" id="editContactEmail" value="edit"></input>
+              <input type="hidden" id="updateContactEmail" value="Save"></input>
+              
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Notes:</th>
+            <td colspan="3"> 
+              <input type="text" class="form-control" id="contactNotes" name="contactNotes" value = "<%= result.contact[0].contactNotes %>" readonly>
+              <input type="button" id="editContactNotes" value="edit"></input>
+              <input type="hidden" id="updateContactNotes" value="Save"></input>
+
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Status:</th>
+            <td colspan="3"> 
+              <select class="form-control" id="contactStatus" name="contactStatus" disabled required>
+                <%
+                var statusList = '';
+                  if(result.contact[0].contactStatus == "Enabled"){
+                    statusList += '<option selected>Enabled</option>';
+                    statusList += '<option>Disabled</option>';
+                } else {
+                    statusList += '<option>Enabled</option>';
+                    statusList += '<option selected>Disabled</option>';
+                }
+                %>
+                <%- statusList %>
+              </select>
+              <input type="button" id="editContactStatus" value="edit"></input>
+              <input type="hidden" id="updateContactStatus" value="Save"></input>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--All drop down fields need to be set at enabled before they will be sent as part of the payload to mongo -->
+      <script>
+        function enableFields() {
+          document.getElementById('contactClientID').disabled = false;
+          document.getElementById('contactStatus').disabled = false;
+       }
+      </script>
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+      </form>
+
+<!-- Contact History Snapshot - thinking maybe last 5 entries -->
+
+            <h4> Communication History</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">AGENT</th>
+                    <th scope="col">CONTACT 1</th>
+                    <th scope="col">CONTACT 2</th>
+                    <th scope="col">VISIT TYPE</th>
+                    <th scope="col">REMARKS</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <%
+                    var eventsList ='';
+                    var k = 1;
+                    for (i = 0; i < result.events.length; i++) {
+                      k = i + 1;
+                      eventsList += '<th scope="row">' + k + '</th>';
+                      var date = result.events[i].eventTimeIn._i;
+                      var str = date.toString();
+                      str = str.substr(0,10);
+                      eventsList += '<td>' + str + '</td>';
+                      eventsList += '<td>' + result.events[i].agentAbbrev + '</td>';
+                      eventsList += '<td>' + result.events[i].contact1 + '</td>';
+                      eventsList += '<td>' + result.events[i].contact2 + '</td>';
+                      eventsList += '<td>' + result.events[i].eventType + '</td>';
+                      eventsList += '<td>' + result.events[i].eventRemarks + '</td>';
+                      eventsList += '</tr>';
+                  }
+                  %>
+                  <%- eventsList %>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+
+<!-- BACK BUTTON -->
+      <div class="form-row">
+        <div class="form-group col">
+          <button type="button" class="btn btn-primary" onclick="goBack()">Back</button>
+        </div>
+        <script>
+          function goBack() {
+            window.history.back();
+          }
+        </script>
+      </div>
+    </div>
+  </div>
+
+    </main>
+
+    <aside class="aside-menu-hidden">
+      <!-- Aside menu content here -->
+    </aside>
+
+  </div>
+  <footer class="app-footer">
+    <% include partials/footer %>
+  </footer>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel='stylesheet' href='https://unpkg.com/@coreui/coreui@2.1.16/dist/css/coreui.min.css' />
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+  </head>
+
+<body class="app header-fixed sidebar-show sidebar-fixed">
+
+  <header class="app-header navbar">
+
+<% include partials/header %>
+
+  </header>
+
+  <div class="app-body">
+
+    <div class="sidebar">
+      <% include partials/sidebar %>
+    </div>
+
+    <main class="main">
+
+      <div class="card w-auto">
+        <div class="card-body">
+
+<h3> <strong>Activity Report</strong></h3>
+<h4><small class="text">Agent: <u><%- agent %></u></small></h4>
+<h4><small class="text">Date Range: <u><%- dateRange %></u></small></h4>
+
+  <!-- Extracted data in Table Form -->
+
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">DATE</th>
+        <th scope="col">CLIENT</th>
+        <th scope="col">CONTACT 1</th>
+        <th scope="col">CONTACT 2</th>
+        <th scope="col">VISIT TYPE</th>
+        <th scope="col">TIME IN</th>
+        <th scope="col">TIME OUT</th>
+        <th scope="col">DURATION</th>
+        <th scope="col">REMARKS</th>
+      </tr>
+    </thead>
+    <tbody>
+        <%
+          var list = '';
+          var k = 1;
+          for (i = 0; i < result.length; i++) {
+            list += '<tr>';
+            list += '<th scope="row">' + k + '</th>';
+            var str = result[i].eventTimeIn._d.toString();
+            var str2 = result[i].eventTimeOut._d.toString();
+            var eventDate = str.substr(0, 15);
+            list += '<td>' + eventDate + '</td>';
+            list += '<td>' + result[i].clientName + '</td>';
+            list += '<td>' + result[i].contact1 + '</td>';
+            list += '<td>' + result[i].contact2 + '</td>';
+            list += '<td>' + result[i].eventType + '</td>';
+            var timeInString = result[i].eventTimeIn._d.toString();
+            var eventTimeIn = str.substr(16, timeInString.length);
+            list += '<td>' + eventTimeIn + '</td>';
+            var timeOutString = result[i].eventTimeOut._d.toString();
+            var eventTimeOut = str2.substr(16, timeOutString.length);
+            list += '<td>' + eventTimeOut + '</td>';
+            var hours = Math.floor(result[i].eventDuration / 60);
+            var minutes = result[i].eventDuration % 60;
+            list += '<td>' + hours + ' hours ' + minutes + ' minutes' + '</td>';
+            list += '<td>' + result[i].eventRemarks + '</td>';
+            list += '</tr>';
+            k++;
+        }
+        %>
+        <%- list %>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Back Button to return to filter page -->
+        <div class="form-row">
+          <div class="form-group col">
+            <button type="button" class="btn btn-primary" onclick="goBack()">Back</button>
+          </div>
+        </div>
+        <script>
+          function goBack() {
+            window.history.back();
+          }
+        </script>
+      </div>
+    </div>
+
+    </main>
+
+    <aside class="aside-menu-hidden">
+      <!-- Aside menu content here -->
+    </aside>
+
+  </div>
+  <footer class="app-footer">
+    <% include partials/footer %>
+  </footer>
+</body>
+
+</html>

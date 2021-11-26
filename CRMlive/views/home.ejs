@@ -1,0 +1,459 @@
+<!Doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+ <!-- Bootstrap Table CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css">
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+ <title>RECORD - Home</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+
+      <main class="c-main mx-md-4 mx-sm-0 my-0">
+        <!-- Main content here -->
+
+        <div class="container-fluid fade-in">
+          <!-- Card Portion for Dashboards -->
+<!--
+              <div class="row">
+                <div class="col-lg-3 col-md-6 col-xs-12 mx-0 my-2 px-1">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="c-callout c-callout-primary">
+                        <small class="text-muted">Your Visits</small><br>
+                        <strong class="h4"><%- result.yourVisitsThisMonth %></strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-xs-12 mx-0 my-2 px-1">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="c-callout c-callout-primary">
+                        <small class="text-muted">Your Total Clients</small><br>
+                        <strong class="h4"><%- result.yourClients %></strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              -->
+<!--
+                <div class="col-lg-3 col-md-6 col-xs-12 mx-0 my-2 px-1">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="c-callout c-callout-primary">
+                        <small class="text-muted">Your Visits</small><br>
+                        <strong class="h4"><%- result.yourVisitsThisMonth %></strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-xs-12 mx-0 my-2 px-1">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="c-callout c-callout-primary">
+                        <small class="text-muted">Your Visits</small><br>
+                        <strong class="h4"><%- result.yourVisitsThisMonth %></strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              -->
+
+              <!-- Desktop Dashboard Element - Monthly Visit Count Per Agent -->
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card">
+                        <div class="card-header">
+                          <div class="row" style="display: flex; align-items: center;">
+                            <div class="col-6">
+                              <strong>Visit Count</strong>
+                            </div>
+                            <div class="col-6" style="display: flex; justify-content: flex-end">
+                              <form method="get">
+                                <div class="form-group my-0">
+                                    <select class="form-control" id="dash1SelectMonth" onchange="dash1UpdateURLParam()">
+                                      <option value="<%- dateToday.clone().format("MM-YYYY"); %>"><%- dateToday.clone().format("MMMM YYYY") %></option>
+                                      <option value="<%- dateToday.clone().subtract(1,'months').format("MM-YYYY"); %>"><%- dateToday.clone().subtract(1,'months').format("MMMM YYYY") %></option>
+                                      <option value="<%- dateToday.clone().subtract(2,'months').format("MM-YYYY"); %>"><%- dateToday.clone().subtract(2,'months').format("MMMM YYYY") %></option>
+                                      <option value="<%- dateToday.clone().subtract(3,'months').format("MM-YYYY"); %>"><%- dateToday.clone().subtract(3,'months').format("MMMM YYYY") %></option>
+                                      <option value="<%- dateToday.clone().subtract(4,'months').format("MM-YYYY"); %>"><%- dateToday.clone().subtract(4,'months').format("MMMM YYYY") %></option>
+                                    </select>
+                                  </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="monthlyVisitCountDash"  style="min-height:250px"></canvas>
+                            <script>
+                                  var ctx = document.getElementById("monthlyVisitCountDash").getContext("2d");
+                                  var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+                                  gradientStroke.addColorStop(0, "#321FDB");
+                                  gradientStroke.addColorStop(1, "#b1aee8");
+
+                                  var monthlyVisitCountDash = new Chart(ctx, {
+                                      type: 'horizontalBar',
+                                      data: {
+                                          labels: [
+                                            <% for(var i = 0; i < result.activeAgents.length; i++) {%>
+                                            "<%- result.activeAgents[i][0] %>",
+                                                      <% } %>
+                                              ],
+                                          datasets: [{
+                                              label: 'Visits',
+                                              data: [
+                                                <% for(var i = 0; i < result.activeAgents.length; i++) {%>
+                                                "<%- result.activeAgents[i][1] %>",
+                                                          <% } %>
+                                              ],
+                                              backgroundColor: gradientStroke
+                                          }]
+                                      },
+                                      options: {
+                                          responsive: true,
+                                          maintainAspectRatio: false,
+                                          legend: {
+                                            display: false,
+                                          },
+                                          scales: {
+                                            xAxes: [{
+                                              ticks: {
+                                                beginAtZero: true,
+                                                stepSize: 1,
+                                              }
+                                            }]
+                                          }
+                                        }
+                                  });
+                            </script>
+                        </div>
+                      </div>
+                </div>
+
+              <!-- Desktop Dashboard Element - Total Visits Per Month -->
+                <div class="col-md-6">
+                  <div class="card">
+                      <div class="card-header">
+                        <div class="row" style="display: flex; align-items: center;">
+                          <div class="col-6">
+                            <strong>Total Team Visits Per Month</strong>
+                          </div>
+                          <div class="col-6" style="display: flex; justify-content: flex-end">
+                            <form>
+                              <div class="form-group my-0">
+                                  <select class="form-control" id="dash2SelectYear" onchange="dash2UpdateURLParam()">
+                                    <option value="<%- dateToday.clone().year(); %>"><%- dateToday.clone().format("YYYY") %></option>
+                                    <option value="<%- dateToday.clone().subtract(1, 'years').year(); %>"><%- dateToday.clone().subtract(1,'year').format("YYYY") %></option>
+                                    <option value="<%- dateToday.clone().subtract(2, 'years').year(); %>"><%- dateToday.clone().subtract(2,'year').format("YYYY") %></option>
+                                  </select>
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <canvas id="teamVisitsDash"  style="min-height:250px"></canvas>
+                        <script>
+                              var ctx = document.getElementById("teamVisitsDash");
+                              var teamVisitsDash = new Chart(ctx, {
+                                  type: 'bar',
+                                  data: {
+                                      labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+                                      datasets: [{
+                                          label: 'Visits',
+                                          data: [
+                                            <% for(var i = 0; i < result.monthlyVisitTotal.length; i++) {%>
+                                            "<%- result.monthlyVisitTotal[i][1] %>",
+                                                      <% } %>
+                                          ],
+                                          backgroundColor: gradientStroke
+                                      },{
+                                        label: 'Visits - Line',
+                                        data: [
+                                          <% for(var i = 0; i < result.monthlyVisitTotal.length; i++) {%>
+                                          "<%- result.monthlyVisitTotal[i][1] %>",
+                                                    <% } %>
+                                        ],
+                                        type: 'line'
+                                      }]
+                                  },
+                                  options: {
+                                      responsive: true,
+                                      maintainAspectRatio: false,
+                                      legend: {
+                                        display: false,
+                                      },
+                                      scales: {
+                                        xAxes: [{
+                                          ticks: {
+                                            stepSize: 1,
+                                            beginAtZero: true,
+                                          }
+                                        }],
+                                        yAxes:[{
+                                          ticks: {
+                                            stepSize: 50,
+                                            beginAtZero: true,
+                                            padding: 10,
+                                            fontStyle: 'normal',
+
+                                          }
+                                        }]
+                                      }
+                                    }
+
+                              });
+                        </script>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+                <!-- Desktop Dashboard Element - Clients Due for Visit -->
+                <div class="row">
+                  <div class="col-xl-12">
+                    <div class="card">
+                      <div class="card-header"><strong>Clients Due for Visit</strong></div>
+                      <div class="card-body">
+                        <div class="table">
+                            <table
+                            data-toggle="table"
+                            data-pagination="true"
+                            data-page-size="8"
+                            data-pagination-successively-size="1"
+                            data-pagination-pages-by-side="0"
+                            data-pagination-parts="['pageInfoShort', 'pageSize', 'pageList']"
+                            class="table table-hover table-borderless table-striped px-2 py-2">
+                              <thead class="thead-light">
+                                <tr>
+                                  <th class="d-none d-md-table-cell" data-halign="center" data-align="left" data-width="5" data-width-unit="%"></th>
+                                  <th data-halign="center" data-align="left" data-width="50" data-width-unit="%">Client</th>
+                                  <th class="d-none d-md-table-cell" data-halign="center" data-align="left" data-width="15" data-width-unit="%">Agent</th>
+                                  <th data-halign="center" data-align="left" data-width="15" data-width-unit="%">Last Visit</th>
+                                  <th class="d-none d-md-table-cell" data-halign="center" data-align="left" data-width="15" data-width-unit="%">Days since Last Visit</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                  <%
+                                      var list = '';
+                                      var k = 1;
+                                      for (i = 0; i < result.visitDue.length; i++) {
+                                        list += '<tr>';
+                                        list += '<td class="">' + k + '</td>';
+                                        list += '<td class="">' + result.visitDue[i][0] + '</td>';
+                                        list += '<td style="text-align: center; vertical-align: middle;"><span class="text-nowrap">' + result.visitDue[i][3] + '</span></td>';
+                                        list += '<td style="text-align: center; vertical-align: middle;"><span class="text-nowrap">' + result.visitDue[i][1]._i.substring(0,10) + '</span></td>';
+                                        list += '<td style="text-align: center; vertical-align: middle;">' + result.visitDue[i][2] + '</td>';
+                                        list += '</tr>';
+                                        k++;
+                                    }
+                                    %>
+                                  <%- list %>
+
+                              </tbody>
+                            </table>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+<!-- Desktop Dashboard Element - Most Visited Customers (Past 30 Days) -->
+                      <div class="col-md-6">
+                        <div class="card">
+                          <div class="card-header"><strong>Most Visited Customers (Past 30 Days)</strong></div>
+                          <div class="card-body">
+                              <canvas id="mostVisitedDash"  style="min-height:250px"></canvas>
+                              <script>
+                                    var ctx = document.getElementById("mostVisitedDash");
+                                    var mostVisitedDash = new Chart(ctx, {
+                                        type: 'horizontalBar',
+                                        data: {
+                                            labels: [
+                                              <% for(var i = 0; i < result.frequentClients.length; i++) {%>
+                                              "<%- result.frequentClients[i][0]%>",
+                                                        <% } %>
+
+                                            ],
+                                            datasets: [{
+                                                label: 'Visits',
+                                                data: [
+                                                  <% for(var i = 0; i < result.frequentClients.length; i++) {%>
+                                                  "<%- result.frequentClients[i][1] %>",
+                                                            <% } %>
+                                                ],
+                                                backgroundColor: gradientStroke
+                                            }]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            legend: {
+                                              display: false,
+                                            },
+                                            scales: {
+                                              xAxes: [{
+                                                ticks: {
+                                                  stepSize: 1,
+                                                  beginAtZero: true,
+                                                }
+                                              }],
+                                              yAxes:[{
+                                                ticks: {
+                                                  mirror: true,
+                                                  z:1,
+                                                  padding: -10,
+                                                  fontStyle: 'normal',
+
+                                                }
+                                              }]
+                                            }
+                                          }
+
+                                    });
+                              </script>
+                          </div>
+                        </div>
+                      </div>
+
+<!-- Desktop Dashboard Element - Google Maps -->
+<!--
+                      <div class="col-md-6">
+                        <div class="card">
+                          <div class="card-header"><strong>Customer Location Map</strong></div>
+                          <div class="card-body">
+                            <div id="googleMap" style="width:100%;height:400px;"></div>
+
+<script>
+function myMap() {
+var mapProp= {
+center:new google.maps.LatLng(51.508742,-0.120850),
+zoom:5,
+};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+                          </div>
+                        </div>
+                      </div>
+					  -->
+                </div>
+          </div>
+          <script>
+          var dash1Param = "dash1";
+          var dash1ChangeMonth = document.getElementById('dash1SelectMonth').value;
+          var dash2Param = "dash2";
+          var dash2ChangeYear = document.getElementById('dash2SelectYear').value;
+          var currURL = window.location.href;
+          function URL_add_parameter(url, param, value){
+                var hash       = {};
+                var parser     = document.createElement('a');
+
+                parser.href    = url;
+
+                var parameters = parser.search.split(/\?|&/);
+
+                for(var i=0; i < parameters.length; i++) {
+                    if(!parameters[i])
+                        continue;
+
+                    var ary      = parameters[i].split('=');
+                    hash[ary[0]] = ary[1];
+                }
+
+                hash[param] = value;
+
+                var list = [];
+                Object.keys(hash).forEach(function (key) {
+                    list.push(key + '=' + hash[key]);
+                });
+
+                parser.search = '?' + list.join('&');
+                return parser.href;
+            }
+            function dash1UpdateURLParam() {
+              location.href = URL_add_parameter(location.href, "dash1", document.getElementById('dash1SelectMonth').value);
+            }
+            function dash2UpdateURLParam() {
+              location.href = URL_add_parameter(location.href, "dash2", document.getElementById('dash2SelectYear').value);
+            }
+
+
+            window.onload = onPageLoad();
+            function onPageLoad() {
+            	initListeners();
+            	restoreSavedValues();
+            }
+
+            // Add all listeners in this method
+            function initListeners() {
+
+            	document.getElementById("dash1SelectMonth").addEventListener("change", function() {
+            		sessionStorage.setItem("dash1Select", document.getElementById("dash1SelectMonth").value);
+            	});
+
+              document.getElementById("dash2SelectYear").addEventListener("change", function() {
+                sessionStorage.setItem("dash2Select", document.getElementById("dash2SelectYear").value);
+              });
+
+            	// Add other dropdowns and other inputs that you want to listen ...
+
+            }
+
+            // Restore all saved values in this method
+            function restoreSavedValues() {
+
+            	var dash1SessVal = sessionStorage.getItem("dash1Select");
+              var dash2SessVal = sessionStorage.getItem("dash2Select");
+              if (dash1SessVal) document.getElementById("dash1SelectMonth").value = dash1SessVal;
+              if (dash2SessVal) document.getElementById("dash2SelectYear").value = dash2SessVal;
+
+
+
+
+            	// Restore other values that were previously stored here ...
+
+            }
+          </script>
+
+
+        </div>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+ </body>
+</html>

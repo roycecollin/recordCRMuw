@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Event List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Event List</h1>
+    <ul>
+      <%
+        var list = '';
+        for (i = 0; i < eventList.length; i++) {
+          list += '<li>' + eventList[i].eventRemarks + '</li>';
+        }
+      %>
+      <%- list %>
+    </ul>
+  </body>
+</html>

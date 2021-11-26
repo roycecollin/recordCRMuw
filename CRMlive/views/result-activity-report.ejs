@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+ <title>CRM - Activity Report</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main mt-0 mx-3">
+              <h2>Activity Report</h2>
+              <hr>
+
+
+  <h4><small class="text">Agent: <u><%- agent %></u></small></h4>
+  <h4><small class="text">Date Range: <u><%- dateRange %></u></small></h4>
+
+    <!-- Extracted data in Table Form -->
+
+  <div class="table-responsive">
+    <table class="table table-bordered px-2 py-2 bg-white">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 3%"></th>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">DATE</th>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 15%">CLIENT</th>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 8%">CONTACT 1</th>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 8%">CONTACT 2</th>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 8%">VISIT TYPE</th>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 6%">TIME IN</th>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 6%">TIME OUT</th>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">DURATION</th>
+          <th scope="col" style="text-align: center; vertical-align: middle; width: 26%">REMARKS</th>
+        </tr>
+      </thead>
+      <tbody>
+          <%
+            var list = '';
+            var k = 1;
+            var repContact1 = [];
+            var repContact2 = [];
+            for (i = 0; i < result.length; i++) {
+              list += '<tr>';
+              list += '<th scope="row" style="text-align: center; vertical-align: middle; width: 3%">' + k + '</th>';
+              var str = result[i].eventTimeIn._d.toString();
+              var str2 = result[i].eventTimeOut._d.toString();
+              var eventDate = str.substr(0, 15);
+              if (result[i].contact1 === null){
+                repContact1.push("NA");
+              } else{
+                repContact1.push(result[i].contact1);
+              }
+              if (result[i].contact2 === null){
+                repContact2.push("NA");
+              } else{
+                repContact2.push(result[i].contact2);
+              }
+              list += '<td style="text-align: center; vertical-align: middle; width: 10%">' + eventDate + '</td>';
+              list += '<td style="text-align: center; vertical-align: middle; width: 15%">' + result[i].clientName + '</td>';
+              list += '<td style="text-align: center; vertical-align: middle; width: 8%">' + repContact1[i] + '</td>';
+              list += '<td style="text-align: center; vertical-align: middle; width: 8%">' + repContact2[i] + '</td>';
+              list += '<td style="text-align: center; vertical-align: middle; width: 8%">' + result[i].eventType + '</td>';
+              var timeInString = result[i].eventTimeIn._d.toString();
+              console.log(timeInString);
+              var eventTimeIn = str.substr(16, 8);
+              list += '<td style="text-align: center; vertical-align: middle; width: 6%">' + eventTimeIn + '</td>';
+              var timeOutString = result[i].eventTimeOut._d.toString();
+              var eventTimeOut = str2.substr(16, 8);
+              list += '<td style="text-align: center; vertical-align: middle; width: 6%">' + eventTimeOut + '</td>';
+              var hours = Math.floor(result[i].eventDuration / 60);
+              var minutes = result[i].eventDuration % 60;
+              list += '<td style="text-align: center; vertical-align: middle; width: 10%">' + hours + ' hours ' + minutes + ' minutes' + '</td>';
+              list += '<td style="text-align: left; vertical-align: middle; width: 26%">' + result[i].eventRemarks + '</td>';
+              list += '</tr>';
+              k++;
+          }
+          %>
+          <%- list %>
+      </tbody>
+    </table>
+  </div>
+
+          <script>
+            function goBack() {
+              window.history.back();
+            }
+          </script>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

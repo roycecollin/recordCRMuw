@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel='stylesheet' href='https://unpkg.com/@coreui/coreui@2.1.16/dist/css/coreui.min.css' />
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+  </head>
+
+<body class="app sidebar-show aside-menu-show">
+
+  <header class="app-header navbar">
+
+<% include partials/header %>
+
+  </header>
+
+  <div class="app-body">
+
+    <div class="sidebar">
+      <% include partials/sidebar %>
+    </div>
+
+    <main class="main mt-2 mx-3">
+
+      <div class="card w-auto">
+        <div class="card-body">
+
+<h3> <strong>Contact History Report</strong></h3>
+<h4><small class="text">Client: <u><%- clientName %></u></small></h4>
+<h4><small class="text">Contact: <u><%- contactName %></u></small></h4>
+<h4><small class="text">Date Range: <u><%- dateRange %></u></small></h4>
+
+  <!-- Extracted data in Table Form -->
+
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">DATE</th>
+        <th scope="col">AGENT</th>
+        <th scope="col">VISIT TYPE</th>
+        <th scope="col">REMARKS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+          var list = '';
+          var k = 1;
+          for (i = 0; i < result.length; i++) {
+            list += '<tr>';
+            list += '<th scope="row">' + k + '</th>';
+            var str = result[i].eventTimeIn._d.toString();
+            var eventDate = str.substr(0, 15);
+            list += '<td>' + eventDate + '</td>';
+            list += '<td>' + result[i].agentAbbrev + '</td>';
+            list += '<td>' + result[i].eventType + '</td>';
+            list += '<td>' + result[i].eventRemarks + '</td>';
+            list += '</tr>';
+            k++;
+        }
+        %>
+        <%- list %>
+    </tbody>
+  </table>
+</div>
+
+
+
+<!-- Submit Button to execute -->
+        <div class="form-row">
+          <div class="form-group col">
+            <button type="button" class="btn btn-primary" onclick="goBack()">Back</button>
+          </div>
+        </div>
+        <script>
+          function goBack() {
+            window.history.back();
+          }
+        </script>
+
+      </div>
+    </div>
+
+    </main>
+
+    <aside class="aside-menu-hidden">
+      <!-- Aside menu content here -->
+    </aside>
+
+  </div>
+  <footer class="app-footer">
+    <% include partials/footer %>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+ <title>CRM - Event Entry</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+        <!-- Main content here -->
+      <main class="c-main">
+        <main class="main mt-0 mx-3">
+          <h2>Event Entry Form</h2>
+          <hr>
+          <form id="formAddEvent" name="addEvent" method="post" action="/addEvent">
+          <!-- Event Date & Agent-->
+          <div class="form-row">
+              <div class="form-group col-12 col-md-auto">
+                <label for="eventDate">Date</label>
+                <input type="date" class="form-control" id="eventDate" name="eventDate" onblur="valDate();" min="2020-09-15" max="2030-01-01" required>
+              </div>
+              <div class="form-group col-12 col-md-auto">
+                <label for="agentID">Agent</label>
+                <select class="form-control" name="agentID" required>
+                  <%
+                      var sortedAgents = eventEntryAgents.sort(function(a,b){
+                          if (a.agentAbbrev > b.agentAbbrev) { return 1;}
+                          if (a.agentAbbrev < b.agentAbbrev) {return -1;}
+                          return 0;
+                      });
+                      var list = '<option value="" disabled selected>Select</option>';
+                      for (i = 0; i < sortedAgents.length; i++) {
+                        list += '<option>' + sortedAgents[i].agentAbbrev + '</option>';
+                      }
+                  %>
+                    <%- list %>
+          	     </select>
+              </div>
+          </div>
+
+          <!-- Event Time In & Out-->
+          <div class="form-row">
+              <div class="form-group col-12 col-md-auto">
+                <label for="eventTimeIn">Time In</label>
+                <input type="time" class="form-control" id="eventTimeIn" name="eventTimeIn" required>
+              </div>
+              <div class="form-group col-12 col-md-auto">
+                <label for="eventTimeOut">Time Out</label>
+                <input type="time" class="form-control" id="eventTimeOut" name="eventTimeOut" onchange="valTime();" required>
+              </div>
+          </div>
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+          <script>
+          function valTime(){
+            var valEventDate = moment(document.getElementById("eventDate").value).format().substr(0,11);
+            var valTimeIn = moment(valEventDate.concat(document.getElementById("eventTimeIn").value));
+            var valTimeOut = moment(valEventDate.concat(document.getElementById("eventTimeOut").value));
+            var valTimeOutSub = document.getElementById("eventTimeOut");
+            var msgText = ("Time Out should be after " + moment(valEventDate.concat(document.getElementById("eventTimeIn").value)).format("h:mm a") + ". Please adjust Time Out");
+            if (valTimeOut.isBefore(valTimeIn)) {
+              valTimeOutSub.setCustomValidity("Time Out should be after " + moment(valEventDate.concat(document.getElementById("eventTimeIn").value)).format("h:mm a") + ". Please adjust Time Out");
+          } else{
+              valTimeOutSub.setCustomValidity("");
+          }
+          }
+
+          function valDate(){
+            var valEventDate = moment(document.getElementById("eventDate").value);
+            var valTodayDate = moment();
+            if (Math.abs(valTodayDate.diff(valEventDate, 'days')) > 30 && Math.abs(valTodayDate.diff(valEventDate, 'days')) < 60) {
+              alert("Event Date is over 30 days ago or away. Kindly double check inputted date.");
+          }
+            if (Math.abs(valTodayDate.diff(valEventDate, 'days')) > 60 && Math.abs(valTodayDate.diff(valEventDate, 'days')) < 90) {
+              alert("Event Date is over 60 days ago or away. Kindly double check inputted date.");
+          }
+            if (Math.abs(valTodayDate.diff(valEventDate, 'days')) > 90 && Math.abs(valTodayDate.diff(valEventDate, 'days')) < 365) {
+              alert("Event Date is over 90 days ago or away. Kindly double check inputted date.");
+          }
+            if (Math.abs(valTodayDate.diff(valEventDate, 'days')) > 365) {
+              alert("Event Date is over 1 year ago or away. Kindly double check inputted date.");
+          }
+          }
+          </script>
+
+          <script>
+          function formVal(){
+            var valTimeOutSub = document.getElementById("eventTimeOut");
+          }
+          </script>
+          <!-- Client Visited-->
+          <div class="form-row">
+              <div class="form-group col-12 col-md-auto">
+                <label for="clientID">Client</label>
+                <select class="form-control" name="clientID" onChange="changeAgent(this.value);" required>
+              		<%
+                      var sortedClients = eventEntryClients.sort(function(a,b){
+                          if (a.clientName > b.clientName) { return 1;}
+                          if (a.clientName < b.clientName) {return -1;}
+                          return 0;
+                      });
+                    	var list = '<option value="" disabled selected>Select</option>';
+                    	for (i = 0; i < eventEntryClients.length; i++) {
+                    		list += '<option value="' + eventEntryClients[i].clientName + '">' + eventEntryClients[i].clientName + '</option>';
+                    	}
+              		%>
+                  	<%- list %>
+            	  </select>
+              </div>
+
+              <span id='variableJSON' hidden>
+                <%= JSON.stringify(locals.contacts); %>
+              </span>
+              <script>
+                function changeAgent(value){
+                  var contacts = JSON.parse($('#variableJSON').text());
+
+                  var contactOptions = "";
+                  contactOptions += "<option disabled selected>Select</option>";
+                  for (j = 0; j < contacts.length; j++) {
+                    if(contacts[j].contactClientID === value) {
+                      contactOptions += "<option>" + contacts[j].contactFirstName + " " + contacts[j].contactLastName + "</option>";
+                    }
+                  }
+                  document.getElementById("contactID1").innerHTML = contactOptions;
+                  document.getElementById("contactID2").innerHTML = contactOptions;
+                }
+              </script>
+
+              <div class="form-group col-12 col-md-auto">
+                <label for="eventType">Visit Type</label>
+                <select class="form-control" name="eventType">
+          		  <option>Collection</option>
+          		  <option>Courtesy Visit</option>
+          		  <option>Technical Service</option>
+          		  <option>Delivery</option>
+                </select>
+              </div>
+            </div>
+
+
+          <!-- Contact Visited-->
+          <!-- [TODO] I don't know if I should be referring to the contactID when what I actually want to show up is the contactName. Create a button for Contact(s) visited to pull all contacts with Client = ClientID Above -->
+            <label for="eventContacts">Contact(s) Visited</label>
+            <div class="form-row">
+            		<div class="form-group col-12 col-md-2">
+            			<select class="form-control" name="contactID1" id="contactID1" required>
+                    <option value="" disabled selected >Select</option>
+                  </select>
+            		</div>
+            		<div class="form-group  col-12 col-md-2">
+            			<select class="form-control" name="contactID2" id="contactID2">
+                    <option value="" disabled selected>Select</option>
+                  </select>
+            		</div>
+          	 </div>
+
+          <!-- Event Location/Branch-->
+            <label for="eventBranch">Branch Location (If Applicable)</label>
+            <div class="form-row">
+          		<div class="form-group col-12 col-md-auto">
+          		  <input type="text" class="form-control" id="eventBranch" name="eventBranch" placeholder="Location">
+          		</div>
+            </div>
+
+          <!-- Event Notes-->
+            <label for="eventNotes">Event Notes</label>
+            <div class="form-row">
+          		<div class="form-group col-12 col-md-4">
+          			<textarea class="form-control" name="eventRemarks" rows="3" placeholder="Remarks" required></textarea>
+          		</div>
+          	</div>
+
+            <div class="row">
+              <div class="col-12 col-md-auto">
+                <input class="btn-block btn-primary btn-lg" type="submit" value="Submit" onclick="formVal()">
+              </div>
+            </div>
+          </form>
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

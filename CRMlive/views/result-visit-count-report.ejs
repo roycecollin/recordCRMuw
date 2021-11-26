@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- CoreUI CSS -->
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
+
+ <title>CRM - Visit Count Report</title>
+ </head>
+ <body class="c-app">
+
+   <div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+     <% include partials/sidebar %>
+   </div>
+
+  <div class="c-wrapper">
+    <header class="c-header c-header-dark bg-primary c-header-fixed">
+      <!-- Header content here -->
+      <% include partials/header %>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <!-- Main content here -->
+        <main class="main mt-0 mx-3">
+              <h2>Visit Count Report</h2>
+              <hr>
+
+    <h4><small class="text">Agent: <u><%- agentAbbrev %></u></small></h4>
+    <h4><small class="text">Date Range: <u><%- dateRange %></u></small></h4>
+
+      <!-- Extracted data in Table Form -->
+
+    <div class="table-responsive">
+      <table class="table table-bordered px-2 py-2 bg-white">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" style="text-align: center; vertical-align: middle; width: 3%"></th>
+            <th scope="col" style="text-align: center; vertical-align: middle; width: 20%">CLIENT</th>
+            <th scope="col" style="text-align: center; vertical-align: middle; width: 10%">NUMBER OF VISITS</th>
+            <th scope="col" style="text-align: center; vertical-align: middle; width: 20%">DATE/S OF VISIT/S</th>
+            <th scope="col" style="text-align: center; vertical-align: middle; width: 20%">AVERAGE DURATION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <%
+              var list = '';
+              var k = 1;
+              for (i = 0; i < result.length; i++) {
+                list += '<tr>';
+                list += '<th scope="row" style="text-align: center; vertical-align: middle; width: 3%">' + k + '</th>';
+                list += '<td style="text-align: center; vertical-align: middle; width: 20%">' + result[i]._id + '</td>';
+                list += '<td style="text-align: center; vertical-align: middle; width: 10%">' + result[i].visitCount + '</td>';
+                var eventsDateList = '';
+                for (x = 0; x < result[i].eventDates.length; x++) {
+                  var str = result[i].eventDates[x].toString();
+                  var str = str.substr(0, 15);
+                  eventsDateList += str;
+                  eventsDateList += '<br>';
+                }
+                list += '<td style="text-align: center; vertical-align: middle; width: 20%">' + eventsDateList + '</td>';
+                var hours = Math.floor(result[i].totalDuration / 60);
+                var minutes = result[i].totalDuration % 60;
+                minutes = Math.round(minutes * 100) / 100;
+                list += '<td style="text-align: center; vertical-align: middle; width: 20%">' + hours + ' hours ' + minutes + ' minutes' + '</td>';
+                list += '</tr>';
+                k++;
+            }
+            %>
+            <%- list %>
+
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- Submit Button to execute -->
+
+            <script>
+              function goBack() {
+                window.history.back();
+              }
+            </script>
+        </main>
+      </main>
+    </div>
+    <footer class="c-footer">
+      <!-- Footer content here -->
+      <% include partials/footer %>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+ <!-- Popper.js first, then CoreUI JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9&#43;4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+ <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+ </body>
+</html>

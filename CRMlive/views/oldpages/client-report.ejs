@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Client List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Client List</h1>
+    <ul>
+      <%
+        var list = '';
+        for (i = 0; i < clientList.length; i++) {
+          list += '<li>' + clientList[i].clientName + '</li>';
+        }
+      %>
+      <%- list %>
+    </ul>
+  </body>
+</html>

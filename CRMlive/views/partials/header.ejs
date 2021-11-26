@@ -1,0 +1,144 @@
+<button class="c-header-toggler c-class-toggler d-lg-none" type="button" data-target="#sidebar" data-class="c-sidebar-show">
+<i class="cil-hamburger-menu"></i>
+</button>
+
+
+<a class="c-header-brand d-lg-none c-header-brand-sm-up-center mx-auto" href="/home">
+  <img src="/images/record.svg" width="118" height="46" href="/home"></img>
+</a>
+
+
+<%
+  var grantEventCreate = false;
+  var grantClientCreate = false;
+  var grantContactCreate = false;
+  var grantAccountCreate = false;
+  var grantAccountUpdate = false;
+  var grantPermissionsUpdate = false;
+  var grantImportCreate = false;
+  var grantUserCreate = false;
+
+
+
+  for (i = 0; i < permissions.length; i++){
+        if (permissions[i].resource == 'Event' && permissions[i].action == 'Create:any') {
+          grantEventCreate = true;
+        }
+        if (permissions[i].resource == 'Client' && permissions[i].action == 'Create:any') {
+          grantClientCreate = true;
+        }
+        if (permissions[i].resource == 'Contact' && permissions[i].action == 'Create:any') {
+          grantContactCreate = true;
+        }
+        if (permissions[i].resource == 'Account' && permissions[i].action == 'Create:any') {
+          grantUserCreate = true;
+        }
+        if (permissions[i].resource == 'Account' && permissions[i].action == 'Update:any') {
+          grantUserUpdate = true;
+        }
+        if (permissions[i].resource == 'Permissions' && permissions[i].action == 'Update:any') {
+          grantPermissionsUpdate = true;
+        }
+        if (permissions[i].resource == 'Import' && permissions[i].action == 'Create:any') {
+          grantImportCreate = true;
+        }
+      }
+%>
+
+
+<ul class="c-header-nav d-lg-none px-1">
+  <li class="c-header-nav-item dropdown">
+  <% if (grantEventCreate || grantClientCreate || grantContactCreate || grantUserCreate) {%>
+    <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="cil-caret-bottom"></i></a>
+  <% } %>
+    <div class="dropdown-menu dropdown-menu-right pt-2 pb-2">
+      <div class="dropdown-header bg-light py-2"><strong>NEW</strong></div>
+      <% if (grantClientCreate == true) {%>
+      <a class="dropdown-item" href="/entry-client"><i class="c-sidebar-nav-icon cil-briefcase"></i>Client</a>
+      <% } %>
+      <% if (grantContactCreate == true) {%>
+      <a class="dropdown-item" href="/entry-contact"><i class="c-sidebar-nav-icon cil-contact"></i>Contact</a>
+      <% } %>
+      <% if (grantEventCreate == true) {%>
+      <a class="dropdown-item" href="/entry-event"><i class="c-sidebar-nav-icon cil-calendar"></i>Event</a>
+      <% } %>
+      <% if (grantUserCreate == true) {%>
+      <a class="dropdown-item" href="/entry-user"><i class="c-sidebar-nav-icon cil-user"></i>User</a>
+      <% } %>
+      <div class="dropdown-header bg-light py-2"><strong>SETTINGS</strong></div>
+      <a class="dropdown-item" href="/edit-permissions"><i class="c-sidebar-nav-icon cil-settings"></i>Permissions</a>
+      <a class="dropdown-item" href="#"><i class="c-sidebar-nav-icon cil-user"></i><%- user.username %></a>
+      <a class="dropdown-item" href="#"><i class="c-sidebar-nav-icon cil-settings"></i>Settings</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="/logout">Log Out</a>
+    </div>
+  </li>
+</ul>
+
+
+<!--
+<button class="c-header-toggler c-class-toggler mfs-3 d-lg-none" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  <i class="cil-caret-bottom"></i>
+</button>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+TESTING
+  </div>
+</div>
+-->
+
+
+
+<ul class="c-header-nav d-md-down-none ml-auto">
+  <li class="c-header-nav-item dropdown">
+    <% if (grantEventCreate || grantClientCreate || grantContactCreate || grantUserCreate) {%>
+      <a class="c-header-nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+        NEW
+      </a>
+    <% } %>
+    <div class="dropdown-menu dropdown-menu-right pt-0" aria-labelledby="navbarDropdown">
+          <% if (grantClientCreate == true) {%>
+          <a class="dropdown-item" href="/entry-client">Client</a>
+          <% } %>
+          <% if (grantContactCreate == true) {%>
+          <a class="dropdown-item" href="/entry-contact">Contact</a>
+          <% } %>
+          <% if (grantEventCreate == true) {%>
+          <a class="dropdown-item" href="/entry-event">Event</a>
+          <% } %>
+          <% if (grantUserCreate == true) {%>
+          <a class="dropdown-item" href="/entry-user">User</a>
+          <% } %>
+    </div>
+  </li>
+  <% if (grantImportCreate == true) {%>
+  <li class="c-header-nav-item dropdown">
+    <a class="c-header-nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+      IMPORT
+    </a>
+    <div class="dropdown-menu dropdown-menu-right pt-0" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/import-client">Client</a>
+          <a class="dropdown-item" href="/import-contact">Contact</a>
+          <a class="dropdown-item" href="/import-event">Event</a>
+          <a class="dropdown-item" href="/import-agent">Agent</a>
+    </div>
+  </li>
+  <% } %>
+  <li class="c-header-nav-item dropdown">
+    <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" ariahaspopup="true" aria-expanded="false">
+      <button type="button" class="btn btn-light"> <%- user.username %> </button>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right pt-0">
+      <% if (grantPermissionsUpdate == true) {%>
+        <a class="dropdown-item" href="/edit-permissions"> Permissions</a>
+      <% } %>
+        <a class="dropdown-item" href="#"> Settings</a>
+        <a class="dropdown-item"  id="logOutButton" onclick="" href="/logout"> Log Out</a>
+    </div>
+    <script>
+      document.getElementById("logOutButton").addEventListener("click", function() {
+        sessionStorage.clear();
+      });
+    </script>
+  </li>
+</ul>
