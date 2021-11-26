@@ -2099,12 +2099,22 @@ router.get('/search-client', function(req, res) {
                 // Set our collection
                 var collection = db.get('Clients');
 
-                collection.find({},{},function(e,docs){
-                    res.render('search-client', {
-                        "clientList" : docs,
-                        user : req.user, permissions : results
-                    });
-                });
+                if (req.user.usertype == "Agent"){
+                  collection.find({"agentAbbrev" : req.user.agentAbbrev},function(e,docs){
+                      res.render('search-client', {
+                          "clientList" : docs,
+                          user : req.user, permissions : results
+                      });
+                  });
+                } else {
+                  collection.find({},{},function(e,docs){
+                      res.render('search-client', {
+                          "clientList" : docs,
+                          user : req.user, permissions : results
+                      });
+                  });
+                }
+
             } else {
                 // resource is forbidden for this user/role
                 res.status(403).end();
@@ -2365,11 +2375,20 @@ router.get('/search-contact', function(req, res) {
                         function(callback) {
                             var collection1 = db.get('Clients');
 
-                            collection1.find({},{clientName : 1},function(e,clients){
-                                if (e) return callback(err);
-                                locals.clients = clients;
-                                callback();
-                            })
+                            if (req.user.usertype == "Agent"){
+                              collection1.find({"agentAbbrev" : req.user.agentAbbrev},{clientName : 1},function(e,clients){
+                                  if (e) return callback(err);
+                                  locals.clients = clients;
+                                  callback();
+                              });
+                            } else {
+                              collection1.find({},{clientName : 1},function(e,clients){
+                                  if (e) return callback(err);
+                                  locals.clients = clients;
+                                  callback();
+                              });
+                            }
+
                         },
                         // Load Contacts
                         function(callback) {
@@ -2631,11 +2650,20 @@ router.get('/search-event', function(req, res) {
                     function(callback) {
                         var collection = db.get('Clients');
 
-                        collection.find({},{},function(e,clients){
+                        if (req.user.usertype == "Agent"){
+                          collection.find({"agentAbbrev" : req.user.agentAbbrev},{},function(e,clients){
                             if (e) return callback(err);
                             searchEventClients = clients;
                             callback();
-                        })
+                          });
+                        } else {
+                          collection.find({},{},function(e,clients){
+                              if (e) return callback(err);
+                              searchEventClients = clients;
+                              callback();
+                          });
+                        }
+
                     }
                     ];
 
