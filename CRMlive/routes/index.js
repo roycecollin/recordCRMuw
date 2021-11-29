@@ -1994,11 +1994,19 @@ router.get('/report-contact-history', function(req, res) {
                     function(callback) {
                         var collection1 = db.get('Clients');
 
-                        collection1.find({},{},function(e,clients){
-                            if (e) return callback(err);
-                            reportContactHistoryClients = clients;
-                            callback();
-                        })
+                        if (req.user.usertype == "Agent"){
+                          collection1.find({"agentAbbrev" : req.user.agentAbbrev},{clientName : 1},function(e,clients){
+                              if (e) return callback(err);
+                              reportContactHistoryClients = clients;
+                              callback();
+                          });
+                        } else {
+                          collection1.find({},{clientName : 1},function(e,clients){
+                              if (e) return callback(err);
+                              reportContactHistoryClients = clients;
+                              callback();
+                          });
+                        }
                     },
                     // Load clients
                     function(callback) {
@@ -2058,12 +2066,22 @@ router.get('/report-client-history', function(req, res) {
                 // Set our collection
                 var collection = db.get('Clients');
 
-                collection.find({},{},function(e,docs){
-                    res.render('report-client-history', {
-                        "clientList" : docs,
-                        user : req.user, permissions : results
-                    });
-                });
+                if (req.user.usertype == "Agent"){
+                  collection.find({"agentAbbrev" : req.user.agentAbbrev},function(e,docs){
+                      res.render('report-client-history', {
+                          "clientList" : docs,
+                          user : req.user, permissions : results
+                      });
+                  });
+                } else {
+                  collection.find({},{},function(e,docs){
+                      res.render('report-client-history', {
+                          "clientList" : docs,
+                          user : req.user, permissions : results
+                      });
+                  });
+                }
+
             } else {
                 // resource is forbidden for this user/role
                 res.status(403).end();
