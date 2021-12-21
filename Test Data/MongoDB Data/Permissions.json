@@ -1,0 +1,329 @@
+[{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae262"
+  },
+  "role": "Administrator",
+  "resource": "Client",
+  "action": "Create:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae263"
+  },
+  "role": "Administrator",
+  "resource": "Client",
+  "action": "Read:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae264"
+  },
+  "role": "Administrator",
+  "resource": "Client",
+  "action": "Update:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae265"
+  },
+  "role": "Administrator",
+  "resource": "Client",
+  "action": "Delete:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae266"
+  },
+  "role": "Administrator",
+  "resource": "Contact",
+  "action": "Create:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae267"
+  },
+  "role": "Administrator",
+  "resource": "Contact",
+  "action": "Read:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae268"
+  },
+  "role": "Administrator",
+  "resource": "Contact",
+  "action": "Update:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae269"
+  },
+  "role": "Administrator",
+  "resource": "Contact",
+  "action": "Delete:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae26a"
+  },
+  "role": "Administrator",
+  "resource": "Event",
+  "action": "Create:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae26b"
+  },
+  "role": "Administrator",
+  "resource": "Event",
+  "action": "Read:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae26c"
+  },
+  "role": "Administrator",
+  "resource": "Event",
+  "action": "Update:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae26d"
+  },
+  "role": "Administrator",
+  "resource": "Event",
+  "action": "Delete:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae26e"
+  },
+  "role": "Administrator",
+  "resource": "Import",
+  "action": "Create:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae26f"
+  },
+  "role": "Administrator",
+  "resource": "Import",
+  "action": "Read:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae270"
+  },
+  "role": "Administrator",
+  "resource": "Import",
+  "action": "Update:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae271"
+  },
+  "role": "Administrator",
+  "resource": "Import",
+  "action": "Delete:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae272"
+  },
+  "role": "Administrator",
+  "resource": "Permissions",
+  "action": "Create:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae273"
+  },
+  "role": "Administrator",
+  "resource": "Permissions",
+  "action": "Read:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae274"
+  },
+  "role": "Administrator",
+  "resource": "Permissions",
+  "action": "Update:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae275"
+  },
+  "role": "Administrator",
+  "resource": "Permissions",
+  "action": "Delete:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae276"
+  },
+  "role": "Administrator",
+  "resource": "Roles",
+  "action": "Create:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae277"
+  },
+  "role": "Administrator",
+  "resource": "Roles",
+  "action": "Read:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae278"
+  },
+  "role": "Administrator",
+  "resource": "Roles",
+  "action": "Update:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae279"
+  },
+  "role": "Administrator",
+  "resource": "Roles",
+  "action": "Delete:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae27a"
+  },
+  "role": "Administrator",
+  "resource": "Account",
+  "action": "Create:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae27b"
+  },
+  "role": "Administrator",
+  "resource": "Account",
+  "action": "Read:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae27c"
+  },
+  "role": "Administrator",
+  "resource": "Account",
+  "action": "Update:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f17b4e3073a6d19786ae27d"
+  },
+  "role": "Administrator",
+  "resource": "Account",
+  "action": "Delete:any",
+  "attributes": "*"
+},{
+  "_id": {
+    "$oid": "5f61aaa58084d03460f7703e"
+  },
+  "action": "Create:any",
+  "attributes": "*",
+  "resource": "Client",
+  "role": "Agent"
+},{
+  "_id": {
+    "$oid": "5f61aaa58084d03460f77040"
+  },
+  "action": "Read:any",
+  "attributes": "*",
+  "resource": "Client",
+  "role": "Agent"
+},{
+  "_id": {
+    "$oid": "5f61aaa58084d03460f77044"
+  },
+  "action": "Create:any",
+  "attributes": "*",
+  "resource": "Contact",
+  "role": "Agent"
+},{
+  "_id": {
+    "$oid": "5f61aaa58084d03460f77047"
+  },
+  "action": "Read:any",
+  "attributes": "*",
+  "resource": "Contact",
+  "role": "Agent"
+},{
+  "_id": {
+    "$oid": "5f61aaa58084d03460f7704a"
+  },
+  "action": "Create:any",
+  "attributes": "*",
+  "resource": "Event",
+  "role": "Agent"
+},{
+  "_id": {
+    "$oid": "5f61aaa58084d03460f7704c"
+  },
+  "action": "Read:any",
+  "attributes": "*",
+  "resource": "Event",
+  "role": "Agent"
+},{
+  "_id": {
+    "$oid": "5f61ab5d8084d03460f7716b"
+  },
+  "action": "Read:any",
+  "attributes": "*",
+  "resource": "Client",
+  "role": "ReadOnly"
+},{
+  "_id": {
+    "$oid": "5f61ab5d8084d03460f77170"
+  },
+  "action": "Read:any",
+  "attributes": "*",
+  "resource": "Contact",
+  "role": "ReadOnly"
+},{
+  "_id": {
+    "$oid": "5f61ab5d8084d03460f77175"
+  },
+  "action": "Read:any",
+  "attributes": "*",
+  "resource": "Event",
+  "role": "ReadOnly"
+},{
+  "_id": {
+    "$oid": "5f61ab5d8084d03460f7717a"
+  },
+  "action": "Read:any",
+  "attributes": "*",
+  "resource": "Import",
+  "role": "ReadOnly"
+},{
+  "_id": {
+    "$oid": "5f62b7f09331b669d99b6b96"
+  },
+  "action": "Update:any",
+  "attributes": "*",
+  "resource": "Client",
+  "role": "Agent"
+},{
+  "_id": {
+    "$oid": "5f62b7f09331b669d99b6b9b"
+  },
+  "action": "Update:any",
+  "attributes": "*",
+  "resource": "Contact",
+  "role": "Agent"
+},{
+  "_id": {
+    "$oid": "5f62b7f09331b669d99b6ba1"
+  },
+  "action": "Update:any",
+  "attributes": "*",
+  "resource": "Event",
+  "role": "Agent"
+}]
